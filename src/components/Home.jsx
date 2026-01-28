@@ -4,6 +4,9 @@ import { getStatistics } from '../services/storage';
 function Home({ onStartQuiz, onViewSessions }) {
   const stats = getStatistics();
   const [selectedCategories, setSelectedCategories] = useState(['LLM', 'LLMOps', 'GenAI', 'Forecasting']);
+  const [easyCount, setEasyCount] = useState(10);
+  const [mediumCount, setMediumCount] = useState(10);
+  const [hardCount, setHardCount] = useState(10);
 
   const categories = [
     { id: 'LLM', name: 'LLM', description: 'Large Language Models' },
@@ -25,8 +28,10 @@ function Home({ onStartQuiz, onViewSessions }) {
   };
 
   const handleStartQuiz = () => {
-    onStartQuiz(selectedCategories);
+    onStartQuiz(selectedCategories, { easy: easyCount, medium: mediumCount, hard: hardCount });
   };
+
+  const totalQuestions = easyCount + mediumCount + hardCount;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
@@ -98,6 +103,63 @@ function Home({ onStartQuiz, onViewSessions }) {
             </p>
           </div>
 
+          {/* Difficulty Distribution */}
+          <div className="bg-gray-50 rounded-xl p-6 mb-8">
+            <h2 className="text-xl font-semibold text-gray-900 mb-4">
+              Difficulty Distribution
+            </h2>
+            <div className="space-y-4">
+              <div>
+                <div className="flex justify-between items-center mb-2">
+                  <label className="text-sm font-semibold text-gray-700">Easy Questions</label>
+                  <span className="text-sm font-bold text-green-600">{easyCount}</span>
+                </div>
+                <input
+                  type="range"
+                  min="0"
+                  max="30"
+                  value={easyCount}
+                  onChange={(e) => setEasyCount(parseInt(e.target.value))}
+                  className="w-full h-2 bg-green-200 rounded-lg appearance-none cursor-pointer accent-green-600"
+                />
+              </div>
+              <div>
+                <div className="flex justify-between items-center mb-2">
+                  <label className="text-sm font-semibold text-gray-700">Medium Questions</label>
+                  <span className="text-sm font-bold text-yellow-600">{mediumCount}</span>
+                </div>
+                <input
+                  type="range"
+                  min="0"
+                  max="30"
+                  value={mediumCount}
+                  onChange={(e) => setMediumCount(parseInt(e.target.value))}
+                  className="w-full h-2 bg-yellow-200 rounded-lg appearance-none cursor-pointer accent-yellow-600"
+                />
+              </div>
+              <div>
+                <div className="flex justify-between items-center mb-2">
+                  <label className="text-sm font-semibold text-gray-700">Hard Questions</label>
+                  <span className="text-sm font-bold text-red-600">{hardCount}</span>
+                </div>
+                <input
+                  type="range"
+                  min="0"
+                  max="30"
+                  value={hardCount}
+                  onChange={(e) => setHardCount(parseInt(e.target.value))}
+                  className="w-full h-2 bg-red-200 rounded-lg appearance-none cursor-pointer accent-red-600"
+                />
+              </div>
+              <div className="pt-3 border-t border-gray-300">
+                <div className="flex justify-between items-center">
+                  <span className="font-semibold text-gray-900">Total Questions:</span>
+                  <span className="text-xl font-bold text-indigo-600">{totalQuestions}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
           {/* Quiz Info */}
           <div className="bg-gray-50 rounded-xl p-6 mb-8">
             <h2 className="text-xl font-semibold text-gray-900 mb-4">
@@ -106,7 +168,7 @@ function Home({ onStartQuiz, onViewSessions }) {
             <ul className="space-y-2 text-gray-700">
               <li className="flex items-start">
                 <span className="text-indigo-600 mr-2">•</span>
-                <span>30 questions per quiz</span>
+                <span>{totalQuestions} questions per quiz</span>
               </li>
               <li className="flex items-start">
                 <span className="text-indigo-600 mr-2">•</span>

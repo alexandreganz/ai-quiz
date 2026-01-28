@@ -12,8 +12,9 @@ function App() {
   const [quizAnswers, setQuizAnswers] = useState([]);
   const [selectedSessionId, setSelectedSessionId] = useState(null);
 
-  const handleStartQuiz = (selectedCategories) => {
-    const questions = getRandomQuestions(30, selectedCategories);
+  const handleStartQuiz = (selectedCategories, difficultyDistribution) => {
+    const totalCount = difficultyDistribution.easy + difficultyDistribution.medium + difficultyDistribution.hard;
+    const questions = getRandomQuestions(totalCount, selectedCategories, difficultyDistribution);
     setQuizQuestions(questions);
     setCurrentView('quiz');
   };
@@ -52,6 +53,7 @@ function App() {
         <Quiz
           questions={quizQuestions}
           onComplete={handleQuizComplete}
+          onBackToHome={handleBackToHome}
         />
       )}
 

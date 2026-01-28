@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function Quiz({ questions, onComplete }) {
+function Quiz({ questions, onComplete, onBackToHome }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState(Array(questions.length).fill(null));
   const [selectedOption, setSelectedOption] = useState(null);
@@ -65,6 +65,8 @@ function Quiz({ questions, onComplete }) {
         return 'bg-purple-100 text-purple-800';
       case 'GenAI':
         return 'bg-indigo-100 text-indigo-800';
+      case 'Forecasting':
+        return 'bg-orange-100 text-orange-800';
       default:
         return 'bg-gray-100 text-gray-800';
     }
@@ -135,10 +137,22 @@ function Quiz({ questions, onComplete }) {
         {/* Header */}
         <div className="bg-white rounded-2xl shadow-lg p-6 mb-6">
           <div className="flex items-center justify-between mb-4">
-            <div>
-              <h2 className="text-2xl font-bold text-gray-900">
-                Question {currentIndex + 1} of {questions.length}
-              </h2>
+            <div className="flex items-center gap-4">
+              <button
+                onClick={onBackToHome}
+                className="text-indigo-600 hover:text-indigo-800 font-semibold transition duration-200 flex items-center gap-1"
+                title="Back to Home"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                Home
+              </button>
+              <div>
+                <h2 className="text-2xl font-bold text-gray-900">
+                  Question {currentIndex + 1} of {questions.length}
+                </h2>
+              </div>
             </div>
             <div className="flex gap-2">
               <span className={`px-3 py-1 rounded-full text-xs font-semibold ${getCategoryColor(currentQuestion.category)}`}>

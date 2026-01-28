@@ -3,6 +3,8 @@ import { getAllSessions, deleteSession } from '../services/storage';
 
 function Sessions({ onBackToHome, onViewSession }) {
   const [sessions, setSessions] = useState([]);
+  const [filterScore, setFilterScore] = useState('all'); // all, excellent (80+), good (60-79), needs-improvement (<60)
+  const [sortBy, setSortBy] = useState('date'); // date, score
 
   useEffect(() => {
     loadSessions();
@@ -46,6 +48,37 @@ function Sessions({ onBackToHome, onViewSession }) {
     return 'bg-red-50 border-red-200';
   };
 
+  const getFilteredAndSortedSessions = () => {
+    let filtered = [...sessions];
+
+    // Apply score filter
+    if (filterScore !== 'all') {
+      filtered = filtered.filter(session => {
+        const percentage = (session.score / session.totalQuestions) * 100;
+        if (filterScore === 'excellent') return percentage >= 80;
+        if (filterScore === 'good') return percentage >= 60 && percentage < 80;
+        if (filterScore === 'needs-improvement') return percentage < 60;
+        return true;
+      });
+    }
+
+    // Apply sorting
+    if (sortBy === 'score') {
+      filtered.sort((a, b) => {
+        const percentageA = (a.score / a.totalQuestions) * 100;
+        const percentageB = (b.score / b.totalQuestions) * 100;
+        return percentageB - percentageA; // Highest first
+      });
+    } else {
+      // Sort by date (newest first)
+      filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
+    }
+
+    return filtered;
+  };
+
+  const filteredSessions = getFilteredAndSortedSessions();
+
   if (sessions.length === 0) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
@@ -71,11 +104,12 @@ function Sessions({ onBackToHome, onViewSession }) {
       <div className="max-w-5xl mx-auto">
         {/* Header */}
         <div className="bg-white rounded-2xl shadow-lg p-6 mb-6">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between mb-6">
             <div>
               <h1 className="text-3xl font-bold text-gray-900">Quiz Sessions</h1>
               <p className="text-gray-600 mt-1">
                 {sessions.length} session{sessions.length !== 1 ? 's' : ''} completed
+                {filteredSessions.length !== sessions.length && ` • Showing ${filteredSessions.length}`}
               </p>
             </div>
             <button
@@ -85,11 +119,50 @@ function Sessions({ onBackToHome, onViewSession }) {
               Back to Home
             </button>
           </div>
+
+          {/* Filters */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4 border-t border-gray-200">
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">
+                Filter by Score
+              </label>
+              <select
+                value={filterScore}
+                onChange={(e) => setFilterScore(e.target.value)}
+                className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-indigo-500 focus:outline-none"
+              >
+                <option value="all">All Sessions</option>
+                <option value="excellent">Excellent (80%+)</option>
+                <option value="good">Good (60-79%)</option>
+                <option value="needs-improvement">Needs Improvement (&lt;60%)</option>
+              </select>
+            </div>
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">
+                Sort by
+              </label>
+              <select
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
+                className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-indigo-500 focus:outline-none"
+              >
+                <option value="date">Date (Newest First)</option>
+                <option value="score">Score (Highest First)</option>
+              </select>
+            </div>
+          </div>
         </div>
 
         {/* Sessions List */}
-        <div className="space-y-4">
-          {sessions.map((session, index) => {
+        {filteredSessions.length === 0 ? (
+          <div className="bg-white rounded-xl shadow-lg p-12 text-center">
+            <div className="text-6xl mb-4">🔍</div>
+            <h2 className="text-2xl font-bold text-gray-900 mb-2">No sessions match your filters</h2>
+            <p className="text-gray-600">Try adjusting your filter settings</p>
+          </div>
+        ) : (
+          <div className="space-y-4">
+            {filteredSessions.map((session, index) => {
             const percentage = Math.round((session.score / session.totalQuestions) * 100);
 
             return (
@@ -126,7 +199,7 @@ function Sessions({ onBackToHome, onViewSession }) {
 
                     {/* Category breakdown */}
                     <div className="mt-4 flex flex-wrap gap-2">
-                      {['LLM', 'LLMOps', 'GenAI'].map(category => {
+                      {['LLM', 'LLMOps', 'GenAI', 'Forecasting'].map(category => {
                         const categoryQuestions = session.questions.filter(q => q.category === category);
                         const categoryCorrect = categoryQuestions.filter((q, idx) => {
                           const questionIndex = session.questions.indexOf(q);
@@ -139,7 +212,8 @@ function Sessions({ onBackToHome, onViewSession }) {
                             className={`px-3 py-1 rounded-full text-sm font-semibold ${
                               category === 'LLM' ? 'bg-blue-100 text-blue-800' :
                               category === 'LLMOps' ? 'bg-purple-100 text-purple-800' :
-                              'bg-indigo-100 text-indigo-800'
+                              category === 'GenAI' ? 'bg-indigo-100 text-indigo-800' :
+                              'bg-orange-100 text-orange-800'
                             }`}
                           >
                             {category}: {categoryCorrect}/{categoryQuestions.length}
@@ -164,6 +238,7 @@ function Sessions({ onBackToHome, onViewSession }) {
             );
           })}
         </div>
+        )}
       </div>
     </div>
   );

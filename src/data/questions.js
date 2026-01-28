@@ -147,6 +147,78 @@ export const questions = [
     explanation: 'Perplexity measures how well a language model predicts a sample. Lower perplexity indicates better prediction performance. It is the exponentiation of the entropy.'
   },
 
+  // LLM - Medium Questions (Additional)
+  {
+    id: 'llm-m-6',
+    question: 'What is the purpose of layer normalization in transformers?',
+    options: [
+      'To reduce model size',
+      'To stabilize training by normalizing activations across features',
+      'To add non-linearity',
+      'To prevent gradient vanishing'
+    ],
+    correctAnswer: 1,
+    category: 'LLM',
+    difficulty: 'Medium',
+    explanation: 'Layer normalization normalizes activations across the feature dimension for each sample independently, helping stabilize training and improve convergence in transformer models.'
+  },
+  {
+    id: 'llm-m-7',
+    question: 'What is the context window in LLMs?',
+    options: [
+      'The training data timeframe',
+      'The maximum number of tokens the model can process at once',
+      'The model\'s knowledge cutoff date',
+      'The number of layers in the model'
+    ],
+    correctAnswer: 1,
+    category: 'LLM',
+    difficulty: 'Medium',
+    explanation: 'The context window is the maximum sequence length (in tokens) that a model can process at once. For example, GPT-3.5 has a 4K context window, while GPT-4 can handle up to 128K tokens.'
+  },
+  {
+    id: 'llm-m-8',
+    question: 'What is nucleus sampling (top-p sampling)?',
+    options: [
+      'Sampling from the top p% of tokens by probability mass',
+      'Sampling only from the nucleus of the training data',
+      'A method to reduce model size',
+      'Sampling based on nuclear decay patterns'
+    ],
+    correctAnswer: 0,
+    category: 'LLM',
+    difficulty: 'Medium',
+    explanation: 'Nucleus sampling (top-p) samples from the smallest set of tokens whose cumulative probability exceeds p. This provides more dynamic output variety than top-k sampling.'
+  },
+  {
+    id: 'llm-m-9',
+    question: 'What is instruction tuning?',
+    options: [
+      'Training models to follow natural language instructions',
+      'Optimizing hyperparameters',
+      'Fine-tuning for specific domains',
+      'Adjusting model architecture'
+    ],
+    correctAnswer: 0,
+    category: 'LLM',
+    difficulty: 'Medium',
+    explanation: 'Instruction tuning fine-tunes pre-trained models on datasets of instruction-response pairs, teaching them to follow diverse natural language instructions better.'
+  },
+  {
+    id: 'llm-m-10',
+    question: 'What is catastrophic forgetting in neural networks?',
+    options: [
+      'When models forget their training completely',
+      'When models lose previously learned knowledge while learning new tasks',
+      'When models run out of memory',
+      'When models generate nonsensical outputs'
+    ],
+    correctAnswer: 1,
+    category: 'LLM',
+    difficulty: 'Medium',
+    explanation: 'Catastrophic forgetting occurs when a neural network forgets previously learned information upon learning new information, a key challenge in continual learning.'
+  },
+
   // LLM - Hard Questions
   {
     id: 'llm-h-1',
@@ -217,6 +289,48 @@ export const questions = [
     category: 'LLM',
     difficulty: 'Hard',
     explanation: 'The reversal curse refers to the phenomenon where LLMs trained on "A is B" fail to correctly answer "What is the B of A?", showing they don\'t automatically learn bidirectional relationships.'
+  },
+  {
+    id: 'llm-h-6',
+    question: 'What is the purpose of KV cache in transformer inference?',
+    options: [
+      'To cache API responses',
+      'To store previously computed key-value pairs to avoid recomputation during autoregressive generation',
+      'To cache training data',
+      'To store model weights'
+    ],
+    correctAnswer: 1,
+    category: 'LLM',
+    difficulty: 'Hard',
+    explanation: 'KV cache stores the key and value matrices from previous tokens during autoregressive generation, avoiding redundant computation and significantly speeding up inference.'
+  },
+  {
+    id: 'llm-h-7',
+    question: 'What is the Chinchilla scaling law?',
+    options: [
+      'A method for model compression',
+      'The finding that model size and training data should scale proportionally for optimal compute efficiency',
+      'A technique for distributed training',
+      'A new transformer architecture'
+    ],
+    correctAnswer: 1,
+    category: 'LLM',
+    difficulty: 'Hard',
+    explanation: 'The Chinchilla paper showed that for a given compute budget, model size and training tokens should be scaled equally, suggesting many large models are undertrained and smaller models could perform better with more data.'
+  },
+  {
+    id: 'llm-h-8',
+    question: 'What is multi-query attention (MQA)?',
+    options: [
+      'Asking the model multiple questions at once',
+      'A variant where multiple query heads share single key and value heads',
+      'Running multiple attention mechanisms in parallel',
+      'A training technique for better accuracy'
+    ],
+    correctAnswer: 1,
+    category: 'LLM',
+    difficulty: 'Hard',
+    explanation: 'Multi-query attention uses multiple query heads but shares single key and value heads across all queries, reducing memory and computation during inference while maintaining performance.'
   },
 
   // LLMOps - Easy Questions
@@ -361,6 +475,62 @@ export const questions = [
     category: 'LLMOps',
     difficulty: 'Medium',
     explanation: 'RLHF uses human feedback to train reward models that guide the LLM to produce outputs that better align with human values and preferences.'
+  },
+  {
+    id: 'ops-m-6',
+    question: 'What is prompt injection in LLM security?',
+    options: [
+      'Optimizing prompts for better results',
+      'An attack where malicious instructions are embedded in user input to manipulate model behavior',
+      'Adding prompts to training data',
+      'A technique for faster inference'
+    ],
+    correctAnswer: 1,
+    category: 'LLMOps',
+    difficulty: 'Medium',
+    explanation: 'Prompt injection is a security vulnerability where attackers craft inputs that override or manipulate the model\'s intended instructions, potentially causing harmful outputs.'
+  },
+  {
+    id: 'ops-m-7',
+    question: 'What is the purpose of a safety classifier in LLM deployments?',
+    options: [
+      'To classify model versions',
+      'To detect and filter harmful inputs or outputs',
+      'To categorize user queries',
+      'To improve model accuracy'
+    ],
+    correctAnswer: 1,
+    category: 'LLMOps',
+    difficulty: 'Medium',
+    explanation: 'Safety classifiers are separate models that screen inputs and outputs for harmful content, policy violations, or sensitive information before reaching users.'
+  },
+  {
+    id: 'ops-m-8',
+    question: 'What is model drift in production?',
+    options: [
+      'Models moving between servers',
+      'Model performance degrading over time as data distributions change',
+      'Weights changing during inference',
+      'Models generating off-topic responses'
+    ],
+    correctAnswer: 1,
+    category: 'LLMOps',
+    difficulty: 'Medium',
+    explanation: 'Model drift occurs when the distribution of production data diverges from training data over time, causing performance degradation and requiring retraining or updates.'
+  },
+  {
+    id: 'ops-m-9',
+    question: 'What is guardrails in LLM applications?',
+    options: [
+      'Physical server protection',
+      'Rules and constraints to control model behavior and outputs',
+      'API rate limiting',
+      'User authentication systems'
+    ],
+    correctAnswer: 1,
+    category: 'LLMOps',
+    difficulty: 'Medium',
+    explanation: 'Guardrails are programmatic controls that constrain LLM inputs/outputs to ensure safe, compliant, and on-topic responses, including content filters, fact-checking, and output validation.'
   },
 
   // LLMOps - Hard Questions
@@ -578,6 +748,62 @@ export const questions = [
     difficulty: 'Medium',
     explanation: 'Semantic search uses embeddings to find results based on meaning and context rather than exact keyword matches, improving relevance for natural language queries.'
   },
+  {
+    id: 'gen-m-6',
+    question: 'What is the purpose of chunking in RAG systems?',
+    options: [
+      'To compress documents',
+      'To split large documents into smaller segments for embedding and retrieval',
+      'To organize training data',
+      'To reduce API costs'
+    ],
+    correctAnswer: 1,
+    category: 'GenAI',
+    difficulty: 'Medium',
+    explanation: 'Chunking breaks documents into smaller, semantically meaningful segments that fit within embedding model limits and provide more precise retrieval results.'
+  },
+  {
+    id: 'gen-m-7',
+    question: 'What is a vector database?',
+    options: [
+      'A database for storing vector graphics',
+      'A specialized database optimized for storing and searching high-dimensional embeddings',
+      'A database with array data types',
+      'A distributed database system'
+    ],
+    correctAnswer: 1,
+    category: 'GenAI',
+    difficulty: 'Medium',
+    explanation: 'Vector databases (like Pinecone, Weaviate, Chroma) are optimized for storing embeddings and performing fast similarity search using techniques like approximate nearest neighbor search.'
+  },
+  {
+    id: 'gen-m-8',
+    question: 'What is function calling (tool use) in LLMs?',
+    options: [
+      'Calling Python functions during training',
+      'LLMs generating structured API calls to external tools based on user requests',
+      'Internal function calls within the model',
+      'Callback functions in the API'
+    ],
+    correctAnswer: 1,
+    category: 'GenAI',
+    difficulty: 'Medium',
+    explanation: 'Function calling allows LLMs to generate structured calls to external APIs/tools when they determine it\'s needed, enabling actions like database queries, calculations, or web searches.'
+  },
+  {
+    id: 'gen-m-9',
+    question: 'What is hallucination in LLMs?',
+    options: [
+      'Visual artifacts in image generation',
+      'When models generate plausible-sounding but factually incorrect information',
+      'Random output generation',
+      'Model errors during training'
+    ],
+    correctAnswer: 1,
+    category: 'GenAI',
+    difficulty: 'Medium',
+    explanation: 'Hallucination occurs when LLMs confidently generate false information that sounds plausible, a key challenge requiring mitigation through RAG, fact-checking, and careful prompting.'
+  },
 
   // GenAI - Hard Questions
   {
@@ -649,6 +875,138 @@ export const questions = [
     category: 'GenAI',
     difficulty: 'Hard',
     explanation: 'Jailbreaking refers to crafting prompts that attempt to bypass a model\'s safety guidelines and content policies to generate prohibited outputs, a key security concern in LLM deployment.'
+  },
+  {
+    id: 'gen-h-6',
+    question: 'What is the self-consistency technique in chain-of-thought prompting?',
+    options: [
+      'Checking if the model contradicts itself',
+      'Generating multiple reasoning paths and selecting the most consistent answer',
+      'Ensuring prompt formatting is consistent',
+      'Validating model outputs against training data'
+    ],
+    correctAnswer: 1,
+    category: 'GenAI',
+    difficulty: 'Hard',
+    explanation: 'Self-consistency generates multiple chain-of-thought reasoning paths with different random seeds, then selects the answer that appears most frequently, improving accuracy on complex reasoning tasks.'
+  },
+  {
+    id: 'gen-h-7',
+    question: 'What is the purpose of re-ranking in RAG pipelines?',
+    options: [
+      'Sorting database records',
+      'Re-scoring retrieved documents with a more sophisticated model to improve relevance',
+      'Reorganizing the knowledge base',
+      'Updating document priorities'
+    ],
+    correctAnswer: 1,
+    category: 'GenAI',
+    difficulty: 'Hard',
+    explanation: 'Re-ranking uses a cross-encoder or more sophisticated model to re-score initially retrieved documents, often improving relevance by considering query-document interactions more deeply than initial embedding similarity.'
+  },
+
+  // LLM - Easy Questions (Additional)
+  {
+    id: 'llm-e-6',
+    question: 'What does GPT stand for?',
+    options: [
+      'General Purpose Transformer',
+      'Generative Pre-trained Transformer',
+      'Global Processing Technology',
+      'Gradient Propagation Training'
+    ],
+    correctAnswer: 1,
+    category: 'LLM',
+    difficulty: 'Easy',
+    explanation: 'GPT stands for Generative Pre-trained Transformer, representing models that are pre-trained on large text corpora and can generate coherent text.'
+  },
+  {
+    id: 'llm-e-7',
+    question: 'What is an embedding layer in neural networks?',
+    options: [
+      'A layer that compresses images',
+      'A layer that converts tokens into dense vector representations',
+      'The final output layer',
+      'A layer for data augmentation'
+    ],
+    correctAnswer: 1,
+    category: 'LLM',
+    difficulty: 'Easy',
+    explanation: 'An embedding layer maps discrete tokens (words, subwords) into continuous dense vectors that capture semantic relationships and can be processed by neural networks.'
+  },
+  {
+    id: 'llm-e-8',
+    question: 'What is the purpose of the softmax function in language models?',
+    options: [
+      'To make training faster',
+      'To convert logits into probability distributions over vocabulary',
+      'To reduce model size',
+      'To normalize input data'
+    ],
+    correctAnswer: 1,
+    category: 'LLM',
+    difficulty: 'Easy',
+    explanation: 'Softmax converts raw model outputs (logits) into a probability distribution, allowing the model to predict the likelihood of each token in the vocabulary being the next token.'
+  },
+
+  // LLMOps - Easy Questions (Additional)
+  {
+    id: 'ops-e-6',
+    question: 'What is batching in model inference?',
+    options: [
+      'Processing multiple inputs together for efficiency',
+      'Splitting data into training batches',
+      'Grouping API requests by user',
+      'Organizing model versions'
+    ],
+    correctAnswer: 0,
+    category: 'LLMOps',
+    difficulty: 'Easy',
+    explanation: 'Batching groups multiple inference requests together to process simultaneously, improving GPU utilization and throughput in production systems.'
+  },
+  {
+    id: 'ops-e-7',
+    question: 'What is the purpose of logging in production LLM systems?',
+    options: [
+      'To record user activity for marketing',
+      'To track inputs, outputs, errors, and metrics for monitoring and debugging',
+      'To save model weights',
+      'To create user documentation'
+    ],
+    correctAnswer: 1,
+    category: 'LLMOps',
+    difficulty: 'Easy',
+    explanation: 'Logging captures requests, responses, errors, latencies, and other metrics to enable monitoring, debugging, performance analysis, and compliance in production systems.'
+  },
+
+  // GenAI - Easy Questions (Additional)
+  {
+    id: 'gen-e-6',
+    question: 'What is a system prompt?',
+    options: [
+      'A prompt for system administrators',
+      'Initial instructions that set the behavior and role of the AI assistant',
+      'Error messages from the system',
+      'Prompts generated by the operating system'
+    ],
+    correctAnswer: 1,
+    category: 'GenAI',
+    difficulty: 'Easy',
+    explanation: 'A system prompt provides initial instructions that define the AI\'s role, personality, constraints, and behavior guidelines for the entire conversation.'
+  },
+  {
+    id: 'gen-e-7',
+    question: 'What is context in an LLM conversation?',
+    options: [
+      'The training data used',
+      'The conversation history and relevant information available to the model',
+      'The model architecture',
+      'The server environment'
+    ],
+    correctAnswer: 1,
+    category: 'GenAI',
+    difficulty: 'Easy',
+    explanation: 'Context includes the conversation history, system prompts, and any additional information (like retrieved documents) that the model uses to generate relevant responses.'
   },
 
   // Forecasting - Easy Questions
@@ -1266,14 +1624,9 @@ export function getQuestionsByFilter({ category, difficulty, limit }) {
 }
 
 // Get random questions with balanced distribution
-export function getRandomQuestions(count = 30, selectedCategories = ['LLM', 'LLMOps', 'GenAI', 'Forecasting']) {
+export function getRandomQuestions(count = 30, selectedCategories = ['LLM', 'LLMOps', 'GenAI', 'Forecasting'], difficultyDistribution = null) {
   // Filter questions by selected categories
   const filteredQuestions = questions.filter(q => selectedCategories.includes(q.category));
-
-  const questionsPerDifficulty = Math.floor(count / 3);
-  const easy = filteredQuestions.filter(q => q.difficulty === 'Easy');
-  const medium = filteredQuestions.filter(q => q.difficulty === 'Medium');
-  const hard = filteredQuestions.filter(q => q.difficulty === 'Hard');
 
   // Shuffle function
   const shuffle = (array) => {
@@ -1285,10 +1638,28 @@ export function getRandomQuestions(count = 30, selectedCategories = ['LLM', 'LLM
     return shuffled;
   };
 
-  // Get random questions from each difficulty
-  const selectedEasy = shuffle(easy).slice(0, questionsPerDifficulty);
-  const selectedMedium = shuffle(medium).slice(0, questionsPerDifficulty);
-  const selectedHard = shuffle(hard).slice(0, questionsPerDifficulty);
+  let selectedEasy, selectedMedium, selectedHard;
+
+  if (difficultyDistribution) {
+    // Use custom distribution
+    const easy = filteredQuestions.filter(q => q.difficulty === 'Easy');
+    const medium = filteredQuestions.filter(q => q.difficulty === 'Medium');
+    const hard = filteredQuestions.filter(q => q.difficulty === 'Hard');
+
+    selectedEasy = shuffle(easy).slice(0, difficultyDistribution.easy);
+    selectedMedium = shuffle(medium).slice(0, difficultyDistribution.medium);
+    selectedHard = shuffle(hard).slice(0, difficultyDistribution.hard);
+  } else {
+    // Default balanced distribution
+    const questionsPerDifficulty = Math.floor(count / 3);
+    const easy = filteredQuestions.filter(q => q.difficulty === 'Easy');
+    const medium = filteredQuestions.filter(q => q.difficulty === 'Medium');
+    const hard = filteredQuestions.filter(q => q.difficulty === 'Hard');
+
+    selectedEasy = shuffle(easy).slice(0, questionsPerDifficulty);
+    selectedMedium = shuffle(medium).slice(0, questionsPerDifficulty);
+    selectedHard = shuffle(hard).slice(0, questionsPerDifficulty);
+  }
 
   // Combine and shuffle all selected questions
   const combined = [...selectedEasy, ...selectedMedium, ...selectedHard];
