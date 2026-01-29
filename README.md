@@ -59,7 +59,7 @@ npm run dev
 
 ## Question Bank
 
-The app includes 200+ carefully crafted questions covering:
+The app includes 250 carefully crafted questions covering:
 
 ### LLM Topics
 - Transformers and attention mechanisms

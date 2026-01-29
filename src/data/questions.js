@@ -2329,6 +2329,1234 @@ export const questions = [
     category: 'Forecasting Enhancement',
     difficulty: 'Hard',
     explanation: 'Forecast volatility impacts planning. Solutions: 1) Add dampening/smoothing, 2) Tune parameters for stability-accuracy trade-off, 3) Use different models for different horizons (stable for long-term planning, responsive for short-term), 4) Implement forecast reconciliation, 5) Communicate expected volatility.'
+  },
+
+  // Additional LLM Questions (14 more to reach 40)
+  {
+    id: 'llm-e-9',
+    question: 'What is the purpose of the feed-forward network in transformer blocks?',
+    options: [
+      'To process attention outputs',
+      'To apply non-linear transformations to each position independently',
+      'To generate embeddings',
+      'To calculate attention weights'
+    ],
+    correctAnswer: 1,
+    category: 'LLM',
+    difficulty: 'Easy',
+    explanation: 'The feed-forward network applies position-wise transformations (typically two linear layers with a non-linearity) to process the attention outputs, adding capacity to the model.'
+  },
+  {
+    id: 'llm-e-10',
+    question: 'What is the vocabulary in the context of tokenization?',
+    options: [
+      'The set of all possible words in a language',
+      'The set of tokens that the model recognizes',
+      'The training dataset',
+      'The model parameters'
+    ],
+    correctAnswer: 1,
+    category: 'LLM',
+    difficulty: 'Easy',
+    explanation: 'The vocabulary is the set of all unique tokens the model can recognize and generate. For example, GPT models have vocabularies of 50,000-100,000 tokens including words, subwords, and special tokens.'
+  },
+  {
+    id: 'llm-e-11',
+    question: 'What does "autoregressive" mean in language models?',
+    options: [
+      'The model automatically regresses to simpler outputs',
+      'The model generates tokens one at a time, using previously generated tokens as input',
+      'The model uses regression for predictions',
+      'The model automatically corrects errors'
+    ],
+    correctAnswer: 1,
+    category: 'LLM',
+    difficulty: 'Easy',
+    explanation: 'Autoregressive generation means the model produces one token at a time, with each new token conditioned on all previously generated tokens. This is how GPT models generate text sequentially.'
+  },
+  {
+    id: 'llm-m-11',
+    question: 'What is the difference between greedy decoding and beam search?',
+    options: [
+      'Greedy is faster, beam search is more accurate',
+      'Greedy selects the most probable token at each step; beam search keeps multiple candidate sequences',
+      'They are the same thing',
+      'Greedy uses randomness, beam search is deterministic'
+    ],
+    correctAnswer: 1,
+    category: 'LLM',
+    difficulty: 'Medium',
+    explanation: 'Greedy decoding always picks the highest probability token at each step. Beam search maintains k candidate sequences (beams) and explores multiple paths, often producing better overall sequences at higher computational cost.'
+  },
+  {
+    id: 'llm-m-12',
+    question: 'What is the purpose of dropout in transformer training?',
+    options: [
+      'To remove unnecessary tokens',
+      'To prevent overfitting by randomly deactivating neurons during training',
+      'To reduce model size',
+      'To speed up inference'
+    ],
+    correctAnswer: 1,
+    category: 'LLM',
+    difficulty: 'Medium',
+    explanation: 'Dropout randomly sets a percentage of activations to zero during training, forcing the network to learn redundant representations and improving generalization to unseen data.'
+  },
+  {
+    id: 'llm-m-13',
+    question: 'What is the purpose of the [CLS] token in BERT?',
+    options: [
+      'To classify the input language',
+      'A special token whose final representation is used for classification tasks',
+      'To clear the context',
+      'To mark the end of a sentence'
+    ],
+    correctAnswer: 1,
+    category: 'LLM',
+    difficulty: 'Medium',
+    explanation: '[CLS] (classification) is a special token prepended to BERT inputs. Its final hidden state aggregates information from the entire sequence and is used as input to classification heads.'
+  },
+  {
+    id: 'llm-m-14',
+    question: 'What is masked language modeling (MLM)?',
+    options: [
+      'Training the model to hide sensitive information',
+      'Training by predicting randomly masked tokens in the input',
+      'Removing unwanted outputs',
+      'Encrypting model weights'
+    ],
+    correctAnswer: 1,
+    category: 'LLM',
+    difficulty: 'Medium',
+    explanation: 'MLM is BERT\'s pre-training objective: randomly mask 15% of tokens and train the model to predict them using bidirectional context, enabling the model to learn deep bidirectional representations.'
+  },
+  {
+    id: 'llm-h-9',
+    question: 'What is the vanishing gradient problem and how do transformers address it?',
+    options: [
+      'Gradients becoming too small during backpropagation; transformers use skip connections and layer normalization',
+      'Gradients disappearing during inference; transformers use attention',
+      'Model outputs becoming zero; transformers use softmax',
+      'Training data shrinking; transformers use data augmentation'
+    ],
+    correctAnswer: 0,
+    category: 'LLM',
+    difficulty: 'Hard',
+    explanation: 'Vanishing gradients occur when gradients become extremely small in deep networks. Transformers mitigate this with residual/skip connections (adding input to output) and layer normalization, allowing gradients to flow more easily through many layers.'
+  },
+  {
+    id: 'llm-h-10',
+    question: 'What is the key difference between encoder-only, decoder-only, and encoder-decoder transformers?',
+    options: [
+      'Encoder-only (BERT) for understanding, decoder-only (GPT) for generation, encoder-decoder (T5) for seq2seq tasks',
+      'They use different activation functions',
+      'Encoder-only is faster than decoder-only',
+      'Decoder-only cannot be fine-tuned'
+    ],
+    correctAnswer: 0,
+    category: 'LLM',
+    difficulty: 'Hard',
+    explanation: 'Encoder-only models (BERT) use bidirectional attention for understanding tasks. Decoder-only (GPT) use causal attention for generation. Encoder-decoder (T5, BART) combine both for sequence-to-sequence tasks like translation.'
+  },
+  {
+    id: 'llm-h-11',
+    question: 'What is gradient accumulation and when is it useful?',
+    options: [
+      'Storing gradients for later analysis',
+      'Accumulating gradients over multiple mini-batches before updating weights, enabling larger effective batch sizes',
+      'Combining gradients from multiple models',
+      'Preventing gradient explosion'
+    ],
+    correctAnswer: 1,
+    category: 'LLM',
+    difficulty: 'Hard',
+    explanation: 'Gradient accumulation computes gradients over several small batches and sums them before updating weights. This enables training with effective large batch sizes when GPU memory is limited, improving stability and performance.'
+  },
+  {
+    id: 'llm-h-12',
+    question: 'What is the sparse attention mechanism and why is it used?',
+    options: [
+      'Attention with fewer parameters',
+      'Attention where each token only attends to a subset of tokens, reducing O(n²) complexity',
+      'Attention that removes unimportant tokens',
+      'Attention with random weights'
+    ],
+    correctAnswer: 1,
+    category: 'LLM',
+    difficulty: 'Hard',
+    explanation: 'Sparse attention patterns (like local windows, strided patterns, or learned sparsity) reduce the O(n²) complexity by limiting which tokens attend to each other, enabling longer context windows with less computation.'
+  },
+  {
+    id: 'llm-h-13',
+    question: 'What is knowledge distillation in LLMs?',
+    options: [
+      'Extracting facts from the model',
+      'Training a smaller student model to mimic a larger teacher model, compressing knowledge',
+      'Removing redundant knowledge',
+      'Combining multiple models'
+    ],
+    correctAnswer: 1,
+    category: 'LLM',
+    difficulty: 'Hard',
+    explanation: 'Knowledge distillation trains a smaller "student" model to reproduce the outputs (soft labels/probabilities) of a larger "teacher" model, achieving better performance than training the small model from scratch.'
+  },
+  {
+    id: 'llm-h-14',
+    question: 'What is the cold start problem in few-shot learning with LLMs?',
+    options: [
+      'Models not working in cold temperatures',
+      'Difficulty in getting good performance when no examples can fit in context',
+      'Slow model startup time',
+      'Lack of training data'
+    ],
+    correctAnswer: 1,
+    category: 'LLM',
+    difficulty: 'Hard',
+    explanation: 'The cold start problem occurs when tasks are too complex for zero-shot but examples don\'t fit in the context window. Solutions include fine-tuning, retrieval-augmented few-shot, or chain-of-thought prompting.'
+  },
+  {
+    id: 'llm-m-15',
+    question: 'What is the purpose of the [SEP] token in BERT?',
+    options: [
+      'To separate different languages',
+      'To separate different sentences or segments in the input',
+      'To stop generation',
+      'To mark errors'
+    ],
+    correctAnswer: 1,
+    category: 'LLM',
+    difficulty: 'Medium',
+    explanation: '[SEP] (separator) is a special token used in BERT to separate different segments, such as separating two sentences in sentence-pair tasks like question answering or natural language inference.'
+  },
+
+  // Additional LLMOps Questions (19 more to reach 40)
+  {
+    id: 'ops-e-8',
+    question: 'What is a model checkpoint?',
+    options: [
+      'A security verification step',
+      'A saved snapshot of model weights at a point during training',
+      'A testing phase',
+      'A deployment milestone'
+    ],
+    correctAnswer: 1,
+    category: 'LLMOps',
+    difficulty: 'Easy',
+    explanation: 'Checkpoints are saved copies of model weights and training state at specific points, allowing you to resume training, compare versions, or roll back to earlier states if training diverges.'
+  },
+  {
+    id: 'ops-e-9',
+    question: 'What is the purpose of a validation set?',
+    options: [
+      'To validate user credentials',
+      'To evaluate model performance during training on unseen data',
+      'To validate input data quality',
+      'To check model syntax'
+    ],
+    correctAnswer: 1,
+    category: 'LLMOps',
+    difficulty: 'Easy',
+    explanation: 'The validation set is held-out data used to evaluate model performance during training, tune hyperparameters, and prevent overfitting without touching the final test set.'
+  },
+  {
+    id: 'ops-e-10',
+    question: 'What does API rate limiting protect against?',
+    options: [
+      'Model errors',
+      'Excessive usage that could overload systems or incur high costs',
+      'Unauthorized access',
+      'Data corruption'
+    ],
+    correctAnswer: 1,
+    category: 'LLMOps',
+    difficulty: 'Easy',
+    explanation: 'Rate limiting restricts the number of API requests per user/key over time, preventing system overload, managing costs, ensuring fair access, and protecting against abuse or DoS attacks.'
+  },
+  {
+    id: 'ops-m-10',
+    question: 'What is the difference between synchronous and asynchronous inference?',
+    options: [
+      'Sync is faster than async',
+      'Sync waits for response before continuing; async allows processing other requests while waiting',
+      'They are the same',
+      'Async is only for batch processing'
+    ],
+    correctAnswer: 1,
+    category: 'LLMOps',
+    difficulty: 'Medium',
+    explanation: 'Synchronous inference blocks until the response is ready (good for real-time). Asynchronous inference returns immediately with a request ID, allowing the client to check status later (good for long-running tasks).'
+  },
+  {
+    id: 'ops-m-11',
+    question: 'What is blue-green deployment?',
+    options: [
+      'Deploying models with color-coded interfaces',
+      'Maintaining two identical environments (blue=current, green=new) and switching traffic instantly',
+      'A testing methodology',
+      'A data versioning strategy'
+    ],
+    correctAnswer: 1,
+    category: 'LLMOps',
+    difficulty: 'Medium',
+    explanation: 'Blue-green deployment runs two identical production environments. Blue serves traffic while green is updated. After testing, traffic switches instantly to green, enabling quick rollback by switching back to blue.'
+  },
+  {
+    id: 'ops-m-12',
+    question: 'What is model serving?',
+    options: [
+      'Hosting model documentation',
+      'Deploying models as APIs or services to handle inference requests in production',
+      'Training models on servers',
+      'Storing model files'
+    ],
+    correctAnswer: 1,
+    category: 'LLMOps',
+    difficulty: 'Medium',
+    explanation: 'Model serving provides inference APIs where client applications send requests and receive predictions. Serving systems handle batching, scaling, monitoring, and optimization for production workloads.'
+  },
+  {
+    id: 'ops-m-13',
+    question: 'What is the purpose of canary deployment?',
+    options: [
+      'Testing in bird environments',
+      'Gradually rolling out new models to a small subset of users before full deployment',
+      'Deploying only during specific hours',
+      'Testing model accuracy'
+    ],
+    correctAnswer: 1,
+    category: 'LLMOps',
+    difficulty: 'Medium',
+    explanation: 'Canary deployment releases new models to a small percentage of traffic (e.g., 5%) first. If metrics look good, gradually increase. If issues arise, quickly roll back with minimal user impact.'
+  },
+  {
+    id: 'ops-m-14',
+    question: 'What is feature drift in production ML systems?',
+    options: [
+      'Features moving to different servers',
+      'Changes in input feature distributions over time compared to training data',
+      'Loss of feature importance',
+      'Feature engineering errors'
+    ],
+    correctAnswer: 1,
+    category: 'LLMOps',
+    difficulty: 'Medium',
+    explanation: 'Feature drift occurs when the statistical properties of input features change over time (e.g., user behavior shifts, new product categories). This can degrade model performance even if the model itself hasn\'t changed.'
+  },
+  {
+    id: 'ops-m-15',
+    question: 'What is shadow deployment?',
+    options: [
+      'Deploying models in dark mode',
+      'Running a new model in parallel with production, logging predictions without serving them to users',
+      'Backup model deployment',
+      'Testing in a staging environment'
+    ],
+    correctAnswer: 1,
+    category: 'LLMOps',
+    difficulty: 'Medium',
+    explanation: 'Shadow mode runs the new model on production traffic alongside the current model, but only the current model\'s outputs are served. This allows performance comparison on real data before switching.'
+  },
+  {
+    id: 'ops-h-6',
+    question: 'What is the key challenge in versioning LLMs compared to traditional ML models?',
+    options: [
+      'LLMs cannot be versioned',
+      'LLMs are much larger (GBs to TBs), require tracking prompts/configs, and have more complex dependencies',
+      'LLMs change too frequently',
+      'Version control systems don\'t support LLMs'
+    ],
+    correctAnswer: 1,
+    category: 'LLMOps',
+    difficulty: 'Hard',
+    explanation: 'LLM versioning challenges: massive model sizes require specialized storage, prompts/system messages are critical to version, adapter weights (LoRA) need tracking separately, and reproducibility requires careful environment/dependency management.'
+  },
+  {
+    id: 'ops-h-7',
+    question: 'What is the purpose of request/response logging in LLM production systems?',
+    options: [
+      'Just for debugging',
+      'Compliance, monitoring, fine-tuning data collection, debugging, and cost attribution',
+      'Only for billing purposes',
+      'To slow down the system'
+    ],
+    correctAnswer: 1,
+    category: 'LLMOps',
+    difficulty: 'Hard',
+    explanation: 'Comprehensive logging enables: 1) Compliance/audit trails, 2) Performance monitoring, 3) Training data for fine-tuning, 4) Debugging issues, 5) Cost tracking per user/tenant, 6) Detecting misuse, 7) Model evaluation on real usage.'
+  },
+  {
+    id: 'ops-h-8',
+    question: 'What is the difference between parameter-efficient fine-tuning (PEFT) and full fine-tuning?',
+    options: [
+      'PEFT is always better than full fine-tuning',
+      'PEFT updates only a small subset of parameters (e.g., adapters, LoRA) while freezing the base model',
+      'PEFT requires more GPU memory',
+      'Full fine-tuning is faster'
+    ],
+    correctAnswer: 1,
+    category: 'LLMOps',
+    difficulty: 'Hard',
+    explanation: 'PEFT methods (LoRA, adapters, prefix tuning) freeze the base model and train small additional components, requiring 10-100x less memory and storage while achieving comparable performance to full fine-tuning.'
+  },
+  {
+    id: 'ops-h-9',
+    question: 'What is the inference throughput vs. latency trade-off?',
+    options: [
+      'Higher throughput always means lower latency',
+      'Batching increases throughput but may increase per-request latency; optimizing for one often compromises the other',
+      'They are unrelated',
+      'Latency only matters for training'
+    ],
+    correctAnswer: 1,
+    category: 'LLMOps',
+    difficulty: 'Hard',
+    explanation: 'Throughput (requests/sec) vs. latency (time per request) trade-off: Larger batches improve GPU utilization (throughput) but requests wait for batch to fill (higher latency). Balance depends on use case (interactive vs. batch).'
+  },
+  {
+    id: 'ops-h-10',
+    question: 'What is model calibration and why does it matter?',
+    options: [
+      'Adjusting model parameters',
+      'Ensuring predicted probabilities match actual outcome frequencies',
+      'Setting up the training environment',
+      'Validating input data'
+    ],
+    correctAnswer: 1,
+    category: 'LLMOps',
+    difficulty: 'Hard',
+    explanation: 'A calibrated model\'s predicted probabilities reflect true likelihoods (e.g., if model says 80% confidence, it should be correct 80% of time). Important for decision-making, risk assessment, and user trust.'
+  },
+  {
+    id: 'ops-h-11',
+    question: 'What is the purpose of input/output validation in LLM APIs?',
+    options: [
+      'To make the API slower',
+      'To prevent injection attacks, ensure safety, validate format, and enforce business rules',
+      'Only for testing',
+      'To collect user data'
+    ],
+    correctAnswer: 1,
+    category: 'LLMOps',
+    difficulty: 'Hard',
+    explanation: 'Validation protects against: 1) Prompt injection attacks, 2) Malformed inputs that could crash systems, 3) Violating content policies, 4) Exceeding token limits, 5) Invalid parameters, 6) Ensuring outputs meet format requirements.'
+  },
+  {
+    id: 'ops-h-12',
+    question: 'What is the cold start problem in serverless LLM deployments?',
+    options: [
+      'Models not working in cold climates',
+      'Delay when scaling from zero instances, as loading large models takes time',
+      'Starting training from scratch',
+      'Lack of training data'
+    ],
+    correctAnswer: 1,
+    category: 'LLMOps',
+    difficulty: 'Hard',
+    explanation: 'Serverless cold starts are problematic for LLMs due to large model sizes (GBs). Loading weights into memory takes seconds to minutes. Solutions: warm pools, model caching, smaller models, or dedicated instances.'
+  },
+  {
+    id: 'ops-h-13',
+    question: 'What is the purpose of output determinism in LLM production?',
+    options: [
+      'Making all outputs identical',
+      'Ensuring reproducible outputs for the same input (by setting temperature=0, seed) for testing and compliance',
+      'Preventing randomness in training',
+      'Forcing specific outputs'
+    ],
+    correctAnswer: 1,
+    category: 'LLMOps',
+    difficulty: 'Hard',
+    explanation: 'Deterministic outputs (temperature=0, fixed seed) are crucial for: 1) Testing/debugging, 2) Regulatory compliance, 3) Reproducible evaluations, 4) Caching, though it sacrifices output diversity.'
+  },
+  {
+    id: 'ops-h-14',
+    question: 'What is online learning/continuous learning in LLM systems?',
+    options: [
+      'Training only when online',
+      'Incrementally updating models with new data in production without full retraining',
+      'Learning from internet data',
+      'Real-time inference'
+    ],
+    correctAnswer: 1,
+    category: 'LLMOps',
+    difficulty: 'Hard',
+    explanation: 'Online learning updates models continuously with new data, avoiding expensive full retraining. Challenges for LLMs: catastrophic forgetting, ensuring data quality, computational cost, and maintaining safety/alignment.'
+  },
+  {
+    id: 'ops-h-15',
+    question: 'What is the purpose of circuit breakers in LLM API systems?',
+    options: [
+      'Preventing electrical issues',
+      'Automatically stopping requests to failing services to prevent cascading failures',
+      'Breaking down complex queries',
+      'Interrupting long-running requests'
+    ],
+    correctAnswer: 1,
+    category: 'LLMOps',
+    difficulty: 'Hard',
+    explanation: 'Circuit breakers monitor failure rates and automatically stop sending requests to unhealthy services, preventing cascading failures, allowing recovery time, and maintaining overall system stability during partial outages.'
+  },
+
+  // Additional GenAI Questions (17 more to reach 40)
+  {
+    id: 'gen-e-8',
+    question: 'What is prompt chaining?',
+    options: [
+      'Linking multiple prompts together in a sequence',
+      'Breaking complex tasks into steps where output of one prompt feeds into the next',
+      'Using very long prompts',
+      'Connecting multiple models'
+    ],
+    correctAnswer: 1,
+    category: 'GenAI',
+    difficulty: 'Easy',
+    explanation: 'Prompt chaining breaks complex tasks into steps, with each prompt\'s output becoming input for the next. For example: extract entities → classify sentiment → generate summary.'
+  },
+  {
+    id: 'gen-e-9',
+    question: 'What is the purpose of a stop sequence in text generation?',
+    options: [
+      'To stop training',
+      'To tell the model when to stop generating text',
+      'To pause between tokens',
+      'To prevent errors'
+    ],
+    correctAnswer: 1,
+    category: 'GenAI',
+    difficulty: 'Easy',
+    explanation: 'Stop sequences are strings (e.g., "\\n\\n", "END") that tell the model to stop generating. Useful for controlling output length and format, especially in structured generation tasks.'
+  },
+  {
+    id: 'gen-e-10',
+    question: 'What is an AI agent in the context of LLMs?',
+    options: [
+      'A human supervisor',
+      'An LLM system that can use tools and take actions to complete tasks autonomously',
+      'A data collection tool',
+      'An API endpoint'
+    ],
+    correctAnswer: 1,
+    category: 'GenAI',
+    difficulty: 'Easy',
+    explanation: 'AI agents use LLMs as reasoning engines to decide which tools to use (search, calculator, database) and what actions to take, iteratively working toward goals with some autonomy.'
+  },
+  {
+    id: 'gen-m-10',
+    question: 'What is the difference between extractive and generative question answering?',
+    options: [
+      'They are the same thing',
+      'Extractive selects text spans from documents; generative creates new answer text',
+      'Extractive is always more accurate',
+      'Generative only works with structured data'
+    ],
+    correctAnswer: 1,
+    category: 'GenAI',
+    difficulty: 'Medium',
+    explanation: 'Extractive QA (like in BERT) highlights exact spans from source documents. Generative QA (like with GPT) synthesizes new answer text, allowing rephrasing, summarization, and combining information from multiple sources.'
+  },
+  {
+    id: 'gen-m-11',
+    question: 'What is the role of the query in a RAG system?',
+    options: [
+      'To train the model',
+      'To search for and retrieve relevant documents from the knowledge base',
+      'To generate embeddings',
+      'To validate outputs'
+    ],
+    correctAnswer: 1,
+    category: 'GenAI',
+    difficulty: 'Medium',
+    explanation: 'The query is embedded and used to search the vector database for similar documents. Retrieved documents are then added to the LLM prompt as context, grounding the response in specific information.'
+  },
+  {
+    id: 'gen-m-12',
+    question: 'What is the purpose of prompt templates?',
+    options: [
+      'To decorate prompts',
+      'To standardize prompt structure with placeholders for dynamic content',
+      'To compress prompts',
+      'To translate prompts'
+    ],
+    correctAnswer: 1,
+    category: 'GenAI',
+    difficulty: 'Medium',
+    explanation: 'Prompt templates provide reusable structures with variables (e.g., "Summarize this {document} in {language}"). They ensure consistency, make prompts maintainable, and allow easy testing of different inputs.'
+  },
+  {
+    id: 'gen-m-13',
+    question: 'What is constrained generation?',
+    options: [
+      'Limiting model size',
+      'Restricting LLM outputs to follow specific formats or constraints (JSON, grammar, vocabulary)',
+      'Reducing generation speed',
+      'Preventing long outputs'
+    ],
+    correctAnswer: 1,
+    category: 'GenAI',
+    difficulty: 'Medium',
+    explanation: 'Constrained generation forces outputs to match specific structures (valid JSON, specific grammar, allowed vocabulary). Implemented via guided decoding, ensuring outputs are parseable and valid for downstream systems.'
+  },
+  {
+    id: 'gen-m-14',
+    question: 'What is the difference between semantic search and keyword search?',
+    options: [
+      'Semantic is always slower',
+      'Semantic uses meaning/embeddings to find relevant results; keyword matches exact terms',
+      'They produce identical results',
+      'Keyword search is more accurate'
+    ],
+    correctAnswer: 1,
+    category: 'GenAI',
+    difficulty: 'Medium',
+    explanation: 'Keyword search finds exact word matches (fast, misses synonyms). Semantic search uses embeddings to find conceptually similar content even with different wording, improving recall and relevance.'
+  },
+  {
+    id: 'gen-m-15',
+    question: 'What is the purpose of system messages in chat models?',
+    options: [
+      'To log system information',
+      'To set the assistant\'s behavior, role, and constraints for the entire conversation',
+      'To display errors',
+      'To manage memory'
+    ],
+    correctAnswer: 1,
+    category: 'GenAI',
+    difficulty: 'Medium',
+    explanation: 'System messages (e.g., "You are a helpful Python tutor") define the assistant\'s persona, tone, capabilities, and limitations for the conversation, guiding all subsequent responses.'
+  },
+  {
+    id: 'gen-h-8',
+    question: 'What is the difference between dense and sparse retrievers in RAG?',
+    options: [
+      'Dense uses more storage',
+      'Dense uses neural embeddings (semantic); sparse uses term-based methods (BM25, TF-IDF)',
+      'Sparse is always better',
+      'They are the same'
+    ],
+    correctAnswer: 1,
+    category: 'GenAI',
+    difficulty: 'Hard',
+    explanation: 'Dense retrievers use neural embeddings for semantic similarity (better for conceptual matches). Sparse retrievers use term frequency methods (better for exact matches, names). Hybrid approaches often work best.'
+  },
+  {
+    id: 'gen-h-9',
+    question: 'What is prompt injection and how can it be mitigated?',
+    options: [
+      'Adding prompts to training data',
+      'Malicious instructions in user input to override system prompts; mitigate with input filtering, output validation, and instruction hierarchy',
+      'Compressing prompts',
+      'Prompt optimization'
+    ],
+    correctAnswer: 1,
+    category: 'GenAI',
+    difficulty: 'Hard',
+    explanation: 'Prompt injection occurs when user input contains instructions that override system prompts (e.g., "Ignore previous instructions"). Mitigations: input sanitization, output filtering, clear instruction boundaries, monitoring.'
+  },
+  {
+    id: 'gen-h-10',
+    question: 'What is the perplexity-diversity trade-off in text generation?',
+    options: [
+      'Lower perplexity always means better diversity',
+      'Lower perplexity (higher quality) often reduces diversity; need to balance coherence and variety',
+      'They are unrelated',
+      'Diversity doesn\'t matter'
+    ],
+    correctAnswer: 1,
+    category: 'GenAI',
+    difficulty: 'Hard',
+    explanation: 'Low perplexity indicates high-quality, predictable text but can be repetitive. Higher temperature increases diversity but risks incoherence. Balance depends on use case (creative writing vs. factual Q&A).'
+  },
+  {
+    id: 'gen-h-11',
+    question: 'What is the purpose of metadata filtering in RAG systems?',
+    options: [
+      'To remove metadata from documents',
+      'To pre-filter documents by attributes (date, author, category) before semantic search',
+      'To compress metadata',
+      'To validate data quality'
+    ],
+    correctAnswer: 1,
+    category: 'GenAI',
+    difficulty: 'Hard',
+    explanation: 'Metadata filtering applies attribute constraints (e.g., "documents from 2024", "category=finance") before or during vector search, improving relevance and efficiency by narrowing the search space.'
+  },
+  {
+    id: 'gen-h-12',
+    question: 'What is retrieval-augmented fine-tuning (RAFT)?',
+    options: [
+      'Fine-tuning on retrieval tasks only',
+      'Fine-tuning models to better use retrieved context by training on retrieval-augmented examples',
+      'A type of boat for data transfer',
+      'Random fine-tuning approach'
+    ],
+    correctAnswer: 1,
+    category: 'GenAI',
+    difficulty: 'Hard',
+    explanation: 'RAFT fine-tunes models on examples that include retrieved context, teaching them to better distinguish relevant information from distractors and integrate retrieved knowledge into responses.'
+  },
+  {
+    id: 'gen-h-13',
+    question: 'What is the context window overflow problem in RAG?',
+    options: [
+      'Too many users accessing the system',
+      'Retrieved documents exceeding the model\'s context limit, requiring strategies like summarization or re-ranking',
+      'Memory leaks in the application',
+      'Database overflow'
+    ],
+    correctAnswer: 1,
+    category: 'GenAI',
+    difficulty: 'Hard',
+    explanation: 'When retrieved documents exceed context limits, solutions include: 1) Re-ranking to select most relevant chunks, 2) Summarizing documents first, 3) Hierarchical retrieval, 4) Using models with larger context windows.'
+  },
+  {
+    id: 'gen-h-14',
+    question: 'What is the role of negative examples in few-shot prompting?',
+    options: [
+      'To make the model worse',
+      'To show what NOT to do, helping the model understand task boundaries and avoid common errors',
+      'Negative examples don\'t help',
+      'To reduce token count'
+    ],
+    correctAnswer: 1,
+    category: 'GenAI',
+    difficulty: 'Hard',
+    explanation: 'Negative examples demonstrate incorrect outputs or approaches, helping models understand task constraints, avoid common mistakes, and learn the boundaries of acceptable responses.'
+  },
+  {
+    id: 'gen-h-15',
+    question: 'What is iterative refinement in prompt engineering?',
+    options: [
+      'Running the same prompt multiple times',
+      'Using model output to generate improved prompts, then re-running for better results',
+      'Refining the training data',
+      'Manual prompt editing'
+    ],
+    correctAnswer: 1,
+    category: 'GenAI',
+    difficulty: 'Hard',
+    explanation: 'Iterative refinement generates an initial output, then asks the model to critique and improve it, or uses the output to construct a better prompt. This multi-turn approach often improves quality significantly.'
+  },
+
+  // Additional Databricks Questions (17 more to reach 40)
+  {
+    id: 'db-e-6',
+    question: 'What is a cluster in Databricks?',
+    options: [
+      'A group of databases',
+      'A set of computation resources (driver and workers) for running data processing and ML workloads',
+      'A collection of notebooks',
+      'A data storage location'
+    ],
+    correctAnswer: 1,
+    category: 'Databricks',
+    difficulty: 'Easy',
+    explanation: 'A Databricks cluster consists of a driver node and worker nodes that provide distributed compute resources for running Spark jobs, notebooks, and ML training.'
+  },
+  {
+    id: 'db-e-7',
+    question: 'What is the purpose of Auto Loader in Databricks?',
+    options: [
+      'Automatically loading libraries',
+      'Incrementally and efficiently processing new files as they arrive in cloud storage',
+      'Loading machine learning models',
+      'Automatic cluster startup'
+    ],
+    correctAnswer: 1,
+    category: 'Databricks',
+    difficulty: 'Easy',
+    explanation: 'Auto Loader automatically detects and processes new files in cloud storage (S3, ADLS, GCS) as they arrive, making it ideal for streaming ingestion and incremental data processing.'
+  },
+  {
+    id: 'db-e-8',
+    question: 'What is a DataFrame in PySpark?',
+    options: [
+      'A pandas DataFrame',
+      'A distributed collection of data organized into named columns, similar to a database table',
+      'A data visualization frame',
+      'A storage format'
+    ],
+    correctAnswer: 1,
+    category: 'Databricks',
+    difficulty: 'Easy',
+    explanation: 'PySpark DataFrames are distributed, immutable collections with named columns and schema, providing a higher-level API than RDDs with automatic optimization through Spark SQL\'s Catalyst optimizer.'
+  },
+  {
+    id: 'db-m-9',
+    question: 'What is the difference between narrow and wide transformations in Spark?',
+    options: [
+      'Narrow is faster than wide',
+      'Narrow: each input partition contributes to one output partition (no shuffle); Wide: requires shuffling data across partitions',
+      'They are the same',
+      'Wide transformations use more memory'
+    ],
+    correctAnswer: 1,
+    category: 'Databricks',
+    difficulty: 'Medium',
+    explanation: 'Narrow transformations (map, filter) don\'t require shuffling - each input partition independently produces output. Wide transformations (groupBy, join) need shuffling data across the cluster, which is expensive.'
+  },
+  {
+    id: 'db-m-10',
+    question: 'What is the purpose of Delta Live Tables (DLT)?',
+    options: [
+      'Creating static tables',
+      'Declarative ETL framework for building reliable, maintainable data pipelines with automatic testing and monitoring',
+      'Generating live reports',
+      'Real-time dashboards'
+    ],
+    correctAnswer: 1,
+    category: 'Databricks',
+    difficulty: 'Medium',
+    explanation: 'DLT provides declarative pipeline development where you define what data should look like (not how to compute it), with built-in quality checks, lineage tracking, and automatic dependency management.'
+  },
+  {
+    id: 'db-m-11',
+    question: 'What is the Databricks Feature Store?',
+    options: [
+      'A store for UI features',
+      'A centralized repository for storing, discovering, and serving ML features across teams',
+      'A marketplace for applications',
+      'A configuration management tool'
+    ],
+    correctAnswer: 1,
+    category: 'Databricks',
+    difficulty: 'Medium',
+    explanation: 'Feature Store provides centralized feature management with automatic serving, versioning, and lineage tracking, ensuring training-serving consistency and feature reuse across teams and models.'
+  },
+  {
+    id: 'db-m-12',
+    question: 'What does the explain() function do in PySpark?',
+    options: [
+      'Explains errors in code',
+      'Shows the physical and logical execution plan for a DataFrame query',
+      'Provides documentation',
+      'Explains data types'
+    ],
+    correctAnswer: 1,
+    category: 'Databricks',
+    difficulty: 'Medium',
+    explanation: 'explain() displays Spark\'s query execution plan, showing how operations will be executed, helping identify performance issues like unnecessary shuffles, missing optimizations, or inefficient joins.'
+  },
+  {
+    id: 'db-m-13',
+    question: 'What is the purpose of repartition() vs coalesce() in PySpark?',
+    options: [
+      'They do the same thing',
+      'repartition() can increase/decrease partitions with full shuffle; coalesce() only reduces without shuffle',
+      'coalesce() is always faster',
+      'repartition() is deprecated'
+    ],
+    correctAnswer: 1,
+    category: 'Databricks',
+    difficulty: 'Medium',
+    explanation: 'repartition() performs full shuffle and can increase or decrease partitions for better parallelism. coalesce() only reduces partitions without shuffle (more efficient) but doesn\'t rebalance data.'
+  },
+  {
+    id: 'db-h-11',
+    question: 'What is Databricks Photon and what does it optimize?',
+    options: [
+      'A data visualization tool',
+      'A vectorized query engine written in C++ that accelerates Spark SQL and DataFrame operations',
+      'A machine learning library',
+      'A storage format'
+    ],
+    correctAnswer: 1,
+    category: 'Databricks',
+    difficulty: 'Hard',
+    explanation: 'Photon is a native vectorized engine for Spark that provides significant performance improvements (up to 10x) for SQL and DataFrame operations through better CPU utilization and memory management.'
+  },
+  {
+    id: 'db-h-12',
+    question: 'What is the Medallion Architecture (Bronze/Silver/Gold) in Databricks?',
+    options: [
+      'A security model',
+      'A data organization pattern: Bronze=raw, Silver=cleaned/validated, Gold=business-level aggregates',
+      'A pricing tier',
+      'A deployment strategy'
+    ],
+    correctAnswer: 1,
+    category: 'Databricks',
+    difficulty: 'Hard',
+    explanation: 'Medallion Architecture organizes data into layers: Bronze (raw ingestion), Silver (cleaned, validated, deduplicated), Gold (business-level aggregates). This provides clear data quality progression and reusability.'
+  },
+  {
+    id: 'db-h-13',
+    question: 'What is the purpose of broadcast variables in Spark?',
+    options: [
+      'To send messages between nodes',
+      'To efficiently share read-only data across all executors without shuffling',
+      'To broadcast results to users',
+      'To replicate DataFrames'
+    ],
+    correctAnswer: 1,
+    category: 'Databricks',
+    difficulty: 'Hard',
+    explanation: 'Broadcast variables cache read-only data (e.g., lookup tables) on each executor, avoiding repeated shuffling. Critical for optimizing joins where one side is small enough to fit in memory.'
+  },
+  {
+    id: 'db-h-14',
+    question: 'What is Unity Catalog in Databricks?',
+    options: [
+      'A data catalog service',
+      'Unified governance solution for all data and AI assets with fine-grained access control across workspaces',
+      'A model registry',
+      'A workflow scheduler'
+    ],
+    correctAnswer: 1,
+    category: 'Databricks',
+    difficulty: 'Hard',
+    explanation: 'Unity Catalog provides centralized governance for data, models, and notebooks across all workspaces with fine-grained permissions, lineage tracking, and audit logging at the account level.'
+  },
+  {
+    id: 'db-h-15',
+    question: 'What is the purpose of Dynamic File Pruning in Delta Lake?',
+    options: [
+      'Deleting old files automatically',
+      'Skipping files at runtime based on join/filter conditions to avoid reading unnecessary data',
+      'Compressing files dynamically',
+      'Organizing files by date'
+    ],
+    correctAnswer: 1,
+    category: 'Databricks',
+    difficulty: 'Hard',
+    explanation: 'Dynamic File Pruning uses runtime information from filters and joins to skip reading files that won\'t contribute to results, dramatically improving query performance on large Delta tables.'
+  },
+  {
+    id: 'db-h-16',
+    question: 'What is the difference between DataFrame API and Spark SQL?',
+    options: [
+      'They are completely different systems',
+      'Both compile to same execution plan via Catalyst optimizer; DataFrame is programmatic, SQL is declarative',
+      'SQL is always slower',
+      'DataFrame API is deprecated'
+    ],
+    correctAnswer: 1,
+    category: 'Databricks',
+    difficulty: 'Hard',
+    explanation: 'DataFrame API and Spark SQL are equivalent - both compile to the same optimized logical/physical plans via Catalyst. Choose based on preference: programmatic (DataFrame) vs. declarative (SQL).'
+  },
+  {
+    id: 'db-h-17',
+    question: 'What is the purpose of shuffle partitions (spark.sql.shuffle.partitions)?',
+    options: [
+      'To organize data files',
+      'To control parallelism during shuffle operations like joins and aggregations',
+      'To partition storage',
+      'To manage memory'
+    ],
+    correctAnswer: 1,
+    category: 'Databricks',
+    difficulty: 'Hard',
+    explanation: 'spark.sql.shuffle.partitions (default 200) controls how many partitions are created during shuffles. Too few: underutilized cluster. Too many: overhead from small tasks. Tune based on data size and cluster.'
+  },
+  {
+    id: 'db-h-18',
+    question: 'What is the purpose of OPTIMIZE ZORDER BY in Delta Lake?',
+    options: [
+      'To sort data alphabetically',
+      'To co-locate related data using multi-dimensional clustering for improved query performance',
+      'To compress data',
+      'To create indexes'
+    ],
+    correctAnswer: 1,
+    category: 'Databricks',
+    difficulty: 'Hard',
+    explanation: 'OPTIMIZE ZORDER BY reorganizes data using Z-order curves to co-locate related information across multiple dimensions, dramatically improving performance for queries filtering on those columns without explicit partitioning.'
+  },
+  {
+    id: 'db-h-19',
+    question: 'What is the purpose of checkpointing in Spark Streaming?',
+    options: [
+      'To save model checkpoints',
+      'To save streaming state and metadata for fault tolerance and recovery',
+      'To create data snapshots',
+      'To monitor performance'
+    ],
+    correctAnswer: 1,
+    category: 'Databricks',
+    difficulty: 'Hard',
+    explanation: 'Checkpointing in Structured Streaming saves metadata and state information to reliable storage, enabling recovery from failures and allowing state to persist across restarts for stateful operations like aggregations.'
+  },
+
+  // Additional Forecasting Enhancement Questions (20 more to reach 40)
+  {
+    id: 'fce-e-6',
+    question: 'What is backtesting in forecasting?',
+    options: [
+      'Testing the database backend',
+      'Evaluating model performance on historical data by simulating real-world forecasting',
+      'Checking for bugs in code',
+      'Testing with backup data'
+    ],
+    correctAnswer: 1,
+    category: 'Forecasting Enhancement',
+    difficulty: 'Easy',
+    explanation: 'Backtesting simulates real forecasting by training on past data and testing on subsequent periods, evaluating how the model would have performed if deployed at different points in time.'
+  },
+  {
+    id: 'fce-e-7',
+    question: 'What is a baseline model in forecasting?',
+    options: [
+      'The first model ever created',
+      'A simple model (like naive forecast or moving average) used as a performance benchmark',
+      'The production model',
+      'The most complex model'
+    ],
+    correctAnswer: 1,
+    category: 'Forecasting Enhancement',
+    difficulty: 'Easy',
+    explanation: 'Baseline models (naive, seasonal naive, moving average) provide simple benchmarks. Your forecast should outperform baselines; if not, the added complexity isn\'t justified.'
+  },
+  {
+    id: 'fce-e-8',
+    question: 'What does forecast error mean?',
+    options: [
+      'A bug in the forecasting code',
+      'The difference between predicted and actual values',
+      'Missing data in forecasts',
+      'Model training failures'
+    ],
+    correctAnswer: 1,
+    category: 'Forecasting Enhancement',
+    difficulty: 'Easy',
+    explanation: 'Forecast error = Actual - Forecast. Analyzing error patterns (bias, variance, autocorrelation) helps identify model weaknesses and improvement opportunities.'
+  },
+  {
+    id: 'fce-m-8',
+    question: 'What is the purpose of feature selection in forecasting models?',
+    options: [
+      'To randomly pick features',
+      'To identify and keep only the most predictive features, reducing overfitting and improving interpretability',
+      'To select the best model',
+      'To choose training data'
+    ],
+    correctAnswer: 1,
+    category: 'Forecasting Enhancement',
+    difficulty: 'Medium',
+    explanation: 'Feature selection removes irrelevant or redundant features, reducing model complexity, preventing overfitting, speeding up training, and improving interpretability while maintaining or improving accuracy.'
+  },
+  {
+    id: 'fce-m-9',
+    question: 'What is model stacking in ensemble forecasting?',
+    options: [
+      'Putting models on top of each other physically',
+      'Training a meta-model to combine predictions from multiple base models',
+      'Running models sequentially',
+      'Storing multiple models'
+    ],
+    correctAnswer: 1,
+    category: 'Forecasting Enhancement',
+    difficulty: 'Medium',
+    explanation: 'Stacking trains diverse base models (ARIMA, Prophet, XGBoost), then trains a meta-model on their predictions to learn optimal combination weights, often outperforming individual models or simple averaging.'
+  },
+  {
+    id: 'fce-m-10',
+    question: 'What is the purpose of deseasonalizing data before modeling?',
+    options: [
+      'To remove all patterns',
+      'To isolate trend and irregular components by removing seasonal patterns, helping some models work better',
+      'To reduce data size',
+      'To speed up computation'
+    ],
+    correctAnswer: 1,
+    category: 'Forecasting Enhancement',
+    difficulty: 'Medium',
+    explanation: 'Deseasonalizing (seasonal decomposition) removes seasonal patterns, making it easier for some models to capture trends and other patterns. After forecasting, add seasonality back to get final predictions.'
+  },
+  {
+    id: 'fce-m-11',
+    question: 'What is the difference between point forecasts and probabilistic forecasts?',
+    options: [
+      'Point forecasts are more accurate',
+      'Point forecasts give single values; probabilistic forecasts provide distributions or intervals capturing uncertainty',
+      'They are the same',
+      'Probabilistic forecasts are always wider'
+    ],
+    correctAnswer: 1,
+    category: 'Forecasting Enhancement',
+    difficulty: 'Medium',
+    explanation: 'Point forecasts provide single expected values. Probabilistic forecasts give full distributions or prediction intervals, better supporting risk-aware decision-making by quantifying uncertainty.'
+  },
+  {
+    id: 'fce-m-12',
+    question: 'What is forecast combination and when is it beneficial?',
+    options: [
+      'Combining all historical data',
+      'Averaging or optimally weighting predictions from multiple models to improve accuracy and robustness',
+      'Merging datasets',
+      'Combining features'
+    ],
+    correctAnswer: 1,
+    category: 'Forecasting Enhancement',
+    difficulty: 'Medium',
+    explanation: 'Combining forecasts from diverse models (simple average, weighted average, median) often outperforms individual models by reducing model-specific errors and improving robustness to different data patterns.'
+  },
+  {
+    id: 'fce-m-13',
+    question: 'What is rolling window validation in forecasting?',
+    options: [
+      'Validating data in windows',
+      'Iteratively training on expanding/sliding windows and testing on next period to simulate production',
+      'Checking for missing values',
+      'Window-based feature engineering'
+    ],
+    correctAnswer: 1,
+    category: 'Forecasting Enhancement',
+    difficulty: 'Medium',
+    explanation: 'Rolling window validation trains on window [1:n], tests on [n+1], then rolls forward. This simulates real-world forecasting better than single train/test split, providing more robust performance estimates.'
+  },
+  {
+    id: 'fce-h-9',
+    question: 'What is the bias-variance trade-off in forecasting model selection?',
+    options: [
+      'Choosing between biased and varied data',
+      'Balancing underfitting (high bias) vs. overfitting (high variance) to minimize total error',
+      'Bias and variance are unrelated',
+      'Always minimize bias only'
+    ],
+    correctAnswer: 1,
+    category: 'Forecasting Enhancement',
+    difficulty: 'Hard',
+    explanation: 'Simple models have high bias (underfit, miss patterns) but low variance. Complex models have low bias but high variance (overfit training data). Optimal model balances both to minimize out-of-sample error.'
+  },
+  {
+    id: 'fce-h-10',
+    question: 'SCENARIO: Your forecast performs well on average but poorly for new product launches. How should you improve it?',
+    options: [
+      'Ignore new product launches',
+      'Create separate models or features for launches, use analogous products, incorporate launch plans, or use hierarchical models',
+      'Use only historical data',
+      'Remove new products from analysis'
+    ],
+    correctAnswer: 1,
+    category: 'Forecasting Enhancement',
+    difficulty: 'Hard',
+    explanation: 'New product solutions: 1) Separate launch models using analogous products, 2) Features from launch plans (marketing spend, price), 3) Hierarchical models borrowing from category, 4) Ensemble with launch-specific logic.'
+  },
+  {
+    id: 'fce-h-11',
+    question: 'What is forecast value added (FVA) analysis and how does it guide improvements?',
+    options: [
+      'Calculating business value only',
+      'Measuring whether each forecasting step adds value over simpler alternatives, identifying waste',
+      'Adding features to models',
+      'Increasing forecast frequency'
+    ],
+    correctAnswer: 1,
+    category: 'Forecasting Enhancement',
+    difficulty: 'Hard',
+    explanation: 'FVA compares each step (statistical model, analyst adjustments, etc.) against simpler alternatives. Negative FVA means a step hurts accuracy. Use FVA to eliminate wasteful complexity and focus improvements where they matter.'
+  },
+  {
+    id: 'fce-h-12',
+    question: 'What is the difference between judgmental adjustment and forecast override?',
+    options: [
+      'They are the same',
+      'Judgmental adjustment modifies model output based on domain knowledge; override completely replaces it',
+      'Override is always better',
+      'Adjustments are automated'
+    ],
+    correctAnswer: 1,
+    category: 'Forecasting Enhancement',
+    difficulty: 'Hard',
+    explanation: 'Adjustments modify model forecasts (e.g., +10% for promotion). Overrides replace entirely. Both can add value if done systematically, but often introduce bias. Track separately to measure value added.'
+  },
+  {
+    id: 'fce-h-13',
+    question: 'How should you handle promotional/event forecasting when events are irregular?',
+    options: [
+      'Ignore all promotions',
+      'Use event indicators as features, create separate event models, or use causal impact methods',
+      'Average all historical data',
+      'Only use non-promotional data'
+    ],
+    correctAnswer: 1,
+    category: 'Forecasting Enhancement',
+    difficulty: 'Hard',
+    explanation: 'Irregular events require: 1) Binary/categorical features for event presence, 2) Event-specific features (discount %, type), 3) Separate models for event vs. non-event periods, 4) Causal impact analysis, 5) Hierarchical models.'
+  },
+  {
+    id: 'fce-h-14',
+    question: 'What is the role of domain expertise in improving forecast adoption vs. accuracy?',
+    options: [
+      'Domain expertise only improves accuracy',
+      'Domain expertise helps create interpretable models, align with business processes, and build trust, often mattering more for adoption than small accuracy gains',
+      'Expertise is irrelevant',
+      'Accuracy always drives adoption'
+    ],
+    correctAnswer: 1,
+    category: 'Forecasting Enhancement',
+    difficulty: 'Hard',
+    explanation: 'High adoption requires: 1) Forecasts stakeholders understand and trust, 2) Alignment with business processes, 3) Actionable outputs, 4) Explainable drivers. Domain expertise enables these, often mattering more than marginal accuracy improvements.'
+  },
+  {
+    id: 'fce-h-15',
+    question: 'What is the purpose of forecast reconciliation in organizational hierarchies?',
+    options: [
+      'Reconciling budgets',
+      'Ensuring forecasts at different levels (SKU, category, total) are mathematically consistent and sum correctly',
+      'Resolving conflicts between teams',
+      'Adjusting for errors'
+    ],
+    correctAnswer: 1,
+    category: 'Forecasting Enhancement',
+    difficulty: 'Hard',
+    explanation: 'Reconciliation ensures coherence: SKU forecasts sum to category, categories sum to total. Methods include bottom-up, top-down, middle-out, and optimal reconciliation (MinT) that minimizes overall error while maintaining consistency.'
+  },
+  {
+    id: 'fce-h-16',
+    question: 'SCENARIO: After improvements, your model is more accurate but takes 10x longer to run. What should you consider?',
+    options: [
+      'Always choose speed over accuracy',
+      'Evaluate business value of accuracy gain vs. cost of delay; consider tiered approaches, caching, or parallelization',
+      'Accuracy doesn\'t matter',
+      'Never optimize for speed'
+    ],
+    correctAnswer: 1,
+    category: 'Forecasting Enhancement',
+    difficulty: 'Hard',
+    explanation: 'Trade-off analysis: 1) Quantify business impact of accuracy improvement, 2) Cost of delay in decisions, 3) Tiered approach (complex for high-value, simple for others), 4) Technical optimization (parallelization, caching), 5) Incremental updates.'
+  },
+  {
+    id: 'fce-h-17',
+    question: 'What is the purpose of champion/challenger frameworks in production forecasting?',
+    options: [
+      'Running forecasting competitions',
+      'Continuously testing new models against production to identify improvements while maintaining stability',
+      'Challenging forecasts',
+      'Selecting team members'
+    ],
+    correctAnswer: 1,
+    category: 'Forecasting Enhancement',
+    difficulty: 'Hard',
+    explanation: 'Champion/challenger runs production model (champion) alongside experimental models (challengers) in shadow mode, comparing performance on live data. Promotes challenger to champion when it consistently outperforms, enabling safe continuous improvement.'
+  },
+  {
+    id: 'fce-h-18',
+    question: 'How should you handle concept drift in production forecasting systems?',
+    options: [
+      'Ignore drift and keep using the same model',
+      'Monitor performance metrics, detect drift statistically, trigger retraining, and potentially adapt model architecture',
+      'Retrain randomly',
+      'Only retrain annually'
+    ],
+    correctAnswer: 1,
+    category: 'Forecasting Enhancement',
+    difficulty: 'Hard',
+    explanation: 'Concept drift management: 1) Monitor error metrics over time, 2) Statistical drift detection (KS test, PSI), 3) Automated retraining triggers, 4) Sliding training windows, 5) Adaptive models, 6) Ensemble of recent models.'
+  },
+  {
+    id: 'fce-h-19',
+    question: 'What is the purpose of forecast calibration and when is it critical?',
+    options: [
+      'Adjusting forecast timing',
+      'Adjusting forecast distributions to match historical error patterns, critical for probabilistic forecasting and decision-making',
+      'Setting up the system',
+      'Validating inputs'
+    ],
+    correctAnswer: 1,
+    category: 'Forecasting Enhancement',
+    difficulty: 'Hard',
+    explanation: 'Calibration ensures prediction intervals match actual coverage (e.g., 80% intervals contain actuals 80% of time). Critical for inventory optimization, risk management, and any decision based on forecast uncertainty. Use residual analysis and quantile regression.'
   }
 ];
 
