@@ -1,15 +1,18 @@
 # AI Expert Quiz - Interview Preparation
 
-A comprehensive React-based quiz application to help you prepare for AI Expert interviews. Test your knowledge on Large Language Models (LLM), LLMOps, and Generative AI.
+A comprehensive React-based quiz application to help you prepare for AI Expert interviews. Test your knowledge on Large Language Models (LLM), LLMOps, Generative AI, Forecasting, Databricks, and Forecasting Enhancement.
 
 ## Features
 
-- **30 Question Quizzes**: Each quiz contains 30 randomly selected questions
+- **Customizable Quizzes**: Configure quiz length and difficulty distribution
 - **Balanced Difficulty**: Mix of Easy, Medium, and Hard questions
-- **Three Categories**:
+- **Six Categories**:
   - LLM (Large Language Models)
   - LLMOps (LLM Operations)
   - GenAI (Generative AI)
+  - Forecasting (Time Series & Demand Planning)
+  - Databricks (Orchestration & PySpark Best Practices)
+  - Forecasting Enhancement (Model Improvements & Adoption)
 - **Detailed Results**: See correct/incorrect answers with explanations
 - **Session History**: Save and review past quiz attempts
 - **Progress Tracking**: Track improvement over time with statistics
@@ -56,7 +59,7 @@ npm run dev
 
 ## Question Bank
 
-The app includes 55+ carefully crafted questions covering:
+The app includes 200+ carefully crafted questions covering:
 
 ### LLM Topics
 - Transformers and attention mechanisms
@@ -81,6 +84,30 @@ The app includes 55+ carefully crafted questions covering:
 - Few-shot and zero-shot learning
 - Chain-of-thought prompting
 - ReAct framework
+
+### Forecasting Topics
+- Time series forecasting fundamentals
+- ARIMA, SARIMA, Prophet, and XGBoost
+- Forecast performance analysis and metrics
+- Model evaluation (MAE, RMSE, MAPE, MASE)
+- Seasonality, trends, and stationarity
+- Hierarchical forecasting and reconciliation
+
+### Databricks Topics
+- MLflow for model lifecycle management
+- Delta Lake and data engineering
+- PySpark optimization and best practices
+- Workflow orchestration and job scheduling
+- Model deployment and monitoring
+- Distributed model training at scale
+
+### Forecasting Enhancement Topics
+- Model improvement strategies
+- Feature engineering for forecasting
+- Ensemble methods and model selection
+- A/B testing and production deployment
+- Forecast adoption and stakeholder management
+- Monitoring and continuous improvement
 
 ## Project Structure
 

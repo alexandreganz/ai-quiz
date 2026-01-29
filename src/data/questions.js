@@ -1601,6 +1601,734 @@ export const questions = [
     category: 'Forecasting',
     difficulty: 'Hard',
     explanation: 'Best practice: 1) Schedule regular retraining (weekly/monthly), 2) Register models in MLflow, 3) Use staging (Dev→Staging→Production), 4) Monitor for concept drift and data quality, 5) Automate rollback if metrics degrade, 6) Version control everything.'
+  },
+
+  // Forecasting - Performance Analysis Questions
+  {
+    id: 'fc-m-14',
+    question: 'When analyzing forecast performance, what does forecast bias indicate?',
+    options: [
+      'Random errors in the model',
+      'Consistent tendency to over-forecast or under-forecast',
+      'The variance of prediction errors',
+      'The computational cost of the model'
+    ],
+    correctAnswer: 1,
+    category: 'Forecasting',
+    difficulty: 'Medium',
+    explanation: 'Forecast bias measures systematic errors - consistent over-forecasting (positive bias) or under-forecasting (negative bias). Unbiased forecasts have errors that average to zero over time.'
+  },
+  {
+    id: 'fc-m-15',
+    question: 'What is the Tracking Signal in forecast monitoring?',
+    options: [
+      'The number of times a forecast needs updating',
+      'The cumulative forecast error divided by the mean absolute deviation',
+      'The time delay between forecast and actual observation',
+      'A metric for data quality tracking'
+    ],
+    correctAnswer: 1,
+    category: 'Forecasting',
+    difficulty: 'Medium',
+    explanation: 'Tracking Signal = Cumulative Forecast Error / MAD. It detects bias in forecasts. Values beyond ±4 to ±6 typically indicate the model is consistently biased and needs adjustment.'
+  },
+  {
+    id: 'fc-h-21',
+    question: 'When comparing forecast models, why might a model with lower RMSE not always be the best choice?',
+    options: [
+      'RMSE is never a useful metric',
+      'Lower RMSE might indicate overfitting, or the model might not capture business-critical patterns despite lower error',
+      'RMSE only works for ARIMA models',
+      'Models with lower RMSE are always too slow'
+    ],
+    correctAnswer: 1,
+    category: 'Forecasting',
+    difficulty: 'Hard',
+    explanation: 'Lower RMSE can indicate overfitting to the validation set, missing important business patterns (e.g., promotional spikes), or poor performance on critical segments. Always consider multiple metrics, business context, and interpretability.'
+  },
+  {
+    id: 'fc-h-22',
+    question: 'What is the difference between in-sample and out-of-sample forecast accuracy?',
+    options: [
+      'In-sample uses training data, out-of-sample uses test data not seen during training',
+      'In-sample is for ARIMA, out-of-sample is for Prophet',
+      'There is no difference',
+      'In-sample includes outliers, out-of-sample removes them'
+    ],
+    correctAnswer: 0,
+    category: 'Forecasting',
+    difficulty: 'Hard',
+    explanation: 'In-sample accuracy measures fit on training data (prone to overfitting). Out-of-sample accuracy tests on held-out data, providing realistic estimate of forecasting performance. Always report out-of-sample metrics.'
+  },
+  {
+    id: 'fc-h-23',
+    question: 'SCENARIO: Your forecast shows low MAPE (5%) but stakeholders complain forecasts are unusable. What should you investigate?',
+    options: [
+      'Nothing, low MAPE means the model is perfect',
+      'Check if errors are biased, if high-value periods have large errors, or if the model misses critical business events',
+      'Switch to a different algorithm immediately',
+      'Reduce the forecast horizon'
+    ],
+    correctAnswer: 1,
+    category: 'Forecasting',
+    difficulty: 'Hard',
+    explanation: 'Average metrics can hide critical issues: systematic bias (always under/over), large errors during peak periods, missing promotional effects, or poor performance on high-revenue products. Segment your analysis by time periods, products, and business importance.'
+  },
+  {
+    id: 'fc-h-24',
+    question: 'What is a prediction interval vs. a confidence interval in forecasting?',
+    options: [
+      'They are the same thing',
+      'Prediction interval: range for future observations; Confidence interval: range for estimated mean',
+      'Prediction intervals are always narrower',
+      'Confidence intervals are only for regression models'
+    ],
+    correctAnswer: 1,
+    category: 'Forecasting',
+    difficulty: 'Hard',
+    explanation: 'Prediction intervals capture uncertainty about individual future values (wider). Confidence intervals show uncertainty about the estimated mean forecast (narrower). Prediction intervals = parameter uncertainty + residual variance.'
+  },
+  {
+    id: 'fc-m-16',
+    question: 'When analyzing residuals from your forecast model, what pattern would indicate a problem?',
+    options: [
+      'Residuals that look like random noise',
+      'Residuals showing systematic patterns, trends, or autocorrelation',
+      'Positive and negative residuals',
+      'Residuals with mean close to zero'
+    ],
+    correctAnswer: 1,
+    category: 'Forecasting',
+    difficulty: 'Medium',
+    explanation: 'Good residuals should be white noise - random, uncorrelated, normally distributed with mean zero. Patterns indicate the model missed structure: trends suggest missing trend component, autocorrelation suggests missing AR/MA terms.'
+  },
+  {
+    id: 'fc-h-25',
+    question: 'In forecast performance analysis, what is forecast value added (FVA)?',
+    options: [
+      'The business revenue generated by forecasts',
+      'How much a forecast improves over a simple baseline (e.g., naive forecast)',
+      'The computational cost of forecasting',
+      'The number of features used in the model'
+    ],
+    correctAnswer: 1,
+    category: 'Forecasting',
+    difficulty: 'Hard',
+    explanation: 'FVA measures whether a sophisticated forecast adds value over simple methods. FVA = (Baseline Error - Model Error) / Baseline Error. Negative FVA means the complex model performs worse than the baseline.'
+  },
+
+  // Databricks - Easy Questions
+  {
+    id: 'db-e-1',
+    question: 'What is Databricks primarily used for?',
+    options: [
+      'Email management',
+      'Unified analytics platform for big data and machine learning',
+      'Social media monitoring',
+      'Web hosting'
+    ],
+    correctAnswer: 1,
+    category: 'Databricks',
+    difficulty: 'Easy',
+    explanation: 'Databricks is a unified analytics platform built on Apache Spark, designed for big data processing, collaborative data science, and machine learning workflows.'
+  },
+  {
+    id: 'db-e-2',
+    question: 'What is Delta Lake in Databricks?',
+    options: [
+      'A water storage system',
+      'An open-source storage layer that brings ACID transactions to data lakes',
+      'A visualization tool',
+      'A type of machine learning algorithm'
+    ],
+    correctAnswer: 1,
+    category: 'Databricks',
+    difficulty: 'Easy',
+    explanation: 'Delta Lake is an open-source storage layer that provides ACID transactions, scalable metadata handling, and unifies streaming and batch data processing on data lakes.'
+  },
+  {
+    id: 'db-e-3',
+    question: 'What is MLflow in Databricks?',
+    options: [
+      'A data visualization library',
+      'An open-source platform for managing the ML lifecycle',
+      'A SQL query engine',
+      'A cloud storage service'
+    ],
+    correctAnswer: 1,
+    category: 'Databricks',
+    difficulty: 'Easy',
+    explanation: 'MLflow is an open-source platform for managing the complete machine learning lifecycle, including experiment tracking, model packaging, versioning, and deployment.'
+  },
+  {
+    id: 'db-e-4',
+    question: 'What language is Apache Spark primarily written in?',
+    options: [
+      'Python',
+      'Java',
+      'Scala',
+      'R'
+    ],
+    correctAnswer: 2,
+    category: 'Databricks',
+    difficulty: 'Easy',
+    explanation: 'Apache Spark is written in Scala, though it provides APIs for Python (PySpark), Java, R, and SQL. Scala offers the most complete and performant Spark API.'
+  },
+  {
+    id: 'db-e-5',
+    question: 'What is a Databricks notebook?',
+    options: [
+      'A physical notepad for data scientists',
+      'An interactive web-based interface for writing code, queries, and visualizations',
+      'A log file of cluster activities',
+      'A configuration file for jobs'
+    ],
+    correctAnswer: 1,
+    category: 'Databricks',
+    difficulty: 'Easy',
+    explanation: 'Databricks notebooks are collaborative, web-based interfaces that combine code, visualizations, and narrative text, supporting multiple languages (Python, SQL, Scala, R) in a single notebook.'
+  },
+
+  // Databricks - Medium Questions
+  {
+    id: 'db-m-1',
+    question: 'What is the purpose of Databricks Workflows (Jobs)?',
+    options: [
+      'To create data visualizations',
+      'To orchestrate and schedule automated data pipelines and ML workflows',
+      'To manage user permissions',
+      'To monitor cluster health'
+    ],
+    correctAnswer: 1,
+    category: 'Databricks',
+    difficulty: 'Medium',
+    explanation: 'Databricks Workflows (formerly Jobs) orchestrate data engineering and ML pipelines, allowing you to schedule notebooks, Python scripts, JARs, or Delta Live Tables with dependencies, retries, and notifications.'
+  },
+  {
+    id: 'db-m-2',
+    question: 'In PySpark, what is the difference between a DataFrame transformation and an action?',
+    options: [
+      'There is no difference',
+      'Transformations are lazy and create execution plans; actions trigger computation and return results',
+      'Transformations modify data in-place; actions create new DataFrames',
+      'Transformations are faster than actions'
+    ],
+    correctAnswer: 1,
+    category: 'Databricks',
+    difficulty: 'Medium',
+    explanation: 'Transformations (filter, select, groupBy) are lazy - they build an execution plan. Actions (collect, count, show) trigger actual computation. This lazy evaluation enables query optimization.'
+  },
+  {
+    id: 'db-m-3',
+    question: 'What is the Model Registry in MLflow used for?',
+    options: [
+      'Storing training data',
+      'Centralized model versioning, stage transitions (Staging→Production), and lineage tracking',
+      'Hyperparameter tuning',
+      'Data quality checks'
+    ],
+    correctAnswer: 1,
+    category: 'Databricks',
+    difficulty: 'Medium',
+    explanation: 'MLflow Model Registry provides centralized model versioning, stage management (None/Staging/Production/Archived), annotations, and lineage from experiment to production deployment.'
+  },
+  {
+    id: 'db-m-4',
+    question: 'What is the recommended pattern for handling model retraining in production?',
+    options: [
+      'Manual retraining whenever someone remembers',
+      'Scheduled Databricks Jobs with model comparison, validation, and conditional promotion to production',
+      'Retrain every hour regardless of performance',
+      'Never retrain production models'
+    ],
+    correctAnswer: 1,
+    category: 'Databricks',
+    difficulty: 'Medium',
+    explanation: 'Best practice: Schedule Jobs to retrain periodically, compare new model against production on holdout data, log to MLflow, and promote to production only if new model performs better, with automated rollback capabilities.'
+  },
+  {
+    id: 'db-m-5',
+    question: 'In PySpark, what does .cache() do?',
+    options: [
+      'Saves data to disk permanently',
+      'Persists the DataFrame in memory for faster reuse',
+      'Exports data to a cache server',
+      'Compresses the data'
+    ],
+    correctAnswer: 1,
+    category: 'Databricks',
+    difficulty: 'Medium',
+    explanation: 'cache() persists the DataFrame in memory (default storage level: MEMORY_AND_DISK), avoiding recomputation when the same DataFrame is used multiple times in the workflow.'
+  },
+  {
+    id: 'db-m-6',
+    question: 'What is the purpose of partition pruning in Delta Lake?',
+    options: [
+      'Removing old data',
+      'Skipping irrelevant partitions during queries to improve performance',
+      'Splitting data across multiple tables',
+      'Compressing partition files'
+    ],
+    correctAnswer: 1,
+    category: 'Databricks',
+    difficulty: 'Medium',
+    explanation: 'Partition pruning uses partition columns in WHERE clauses to skip reading irrelevant partitions, dramatically improving query performance on large datasets (e.g., filtering by date in date-partitioned tables).'
+  },
+  {
+    id: 'db-m-7',
+    question: 'What is Z-ordering in Delta Lake?',
+    options: [
+      'Alphabetically sorting data',
+      'A data layout optimization that co-locates related information to improve query performance',
+      'A compression algorithm',
+      'A partitioning strategy'
+    ],
+    correctAnswer: 1,
+    category: 'Databricks',
+    difficulty: 'Medium',
+    explanation: 'Z-ordering is a multi-dimensional clustering technique that co-locates related data in the same files, improving query performance on columns frequently used in WHERE clauses without explicit partitioning.'
+  },
+  {
+    id: 'db-m-8',
+    question: 'What is the best practice for handling slowly changing dimensions (SCD) in Delta Lake?',
+    options: [
+      'Delete and reload entire tables',
+      'Use Delta MERGE for upserts with SCD Type 2 tracking (versioning with start/end dates)',
+      'Append all changes without updates',
+      'Use separate tables for each version'
+    ],
+    correctAnswer: 1,
+    category: 'Databricks',
+    difficulty: 'Medium',
+    explanation: 'Delta Lake MERGE enables efficient SCD Type 2 implementations: insert new versions with current timestamps, update old versions with end dates, maintaining full history while keeping current state queryable.'
+  },
+
+  // Databricks - Hard Questions
+  {
+    id: 'db-h-1',
+    question: 'What is the Adaptive Query Execution (AQE) feature in Spark 3.0+?',
+    options: [
+      'A tool for writing queries',
+      'Dynamic optimization of query plans at runtime based on actual data statistics',
+      'A query validation tool',
+      'An automated backup system'
+    ],
+    correctAnswer: 1,
+    category: 'Databricks',
+    difficulty: 'Hard',
+    explanation: 'AQE optimizes query execution dynamically: coalesces shuffle partitions, handles skewed joins, optimizes join strategies based on runtime statistics, improving performance without manual tuning.'
+  },
+  {
+    id: 'db-h-2',
+    question: 'In PySpark for ML pipelines, what is the purpose of using pandas UDFs (vectorized UDFs)?',
+    options: [
+      'To use pandas syntax in PySpark',
+      'To apply Python functions at scale with better performance than row-at-a-time UDFs via Arrow serialization',
+      'To automatically parallelize pandas code',
+      'To convert Spark DataFrames to pandas'
+    ],
+    correctAnswer: 1,
+    category: 'Databricks',
+    difficulty: 'Hard',
+    explanation: 'Pandas UDFs (vectorized UDFs) use Apache Arrow for efficient data transfer between JVM and Python, operating on batches (pandas Series/DataFrame) instead of row-by-row, achieving 10-100x speedup over standard UDFs.'
+  },
+  {
+    id: 'db-h-3',
+    question: 'When orchestrating complex ML workflows in Databricks, what is the best practice for managing dependencies between tasks?',
+    options: [
+      'Run everything sequentially in one notebook',
+      'Use Databricks Workflows with task dependencies, parameterized notebooks, and conditional execution based on task outcomes',
+      'Use sleep() statements to wait for tasks',
+      'Run all tasks in parallel and hope for the best'
+    ],
+    correctAnswer: 1,
+    category: 'Databricks',
+    difficulty: 'Hard',
+    explanation: 'Databricks Workflows supports DAG-based orchestration: define task dependencies, pass parameters between tasks, conditional branching based on task success/failure, parallel execution where possible, with full observability and retry logic.'
+  },
+  {
+    id: 'db-h-4',
+    question: 'What is the VACUUM command in Delta Lake and when should it be used carefully?',
+    options: [
+      'A command to compress data',
+      'Removes old data files no longer referenced, but must consider time travel and concurrent readers',
+      'A data validation tool',
+      'A performance optimization command'
+    ],
+    correctAnswer: 1,
+    category: 'Databricks',
+    difficulty: 'Hard',
+    explanation: 'VACUUM deletes files older than the retention period (default 7 days). Use carefully: ensure retention > time travel needs, check no concurrent long-running queries read old versions, and verify compliance requirements for data retention.'
+  },
+  {
+    id: 'db-h-5',
+    question: 'SCENARIO: Your PySpark job is spilling to disk and running slowly. What optimization techniques should you try?',
+    options: [
+      'Add more code comments',
+      'Increase executor memory, adjust spark.sql.shuffle.partitions, optimize join strategies, use broadcast for small tables, add filters early',
+      'Convert to pandas and run locally',
+      'Reduce data quality checks'
+    ],
+    correctAnswer: 1,
+    category: 'Databricks',
+    difficulty: 'Hard',
+    explanation: 'Spilling indicates memory pressure. Solutions: 1) Increase executor/driver memory, 2) Tune shuffle partitions (spark.sql.shuffle.partitions), 3) Use broadcast joins for small tables, 4) Push filters early, 5) Avoid wide transformations, 6) Cache intermediate results strategically.'
+  },
+  {
+    id: 'db-h-6',
+    question: 'What is the purpose of Delta Lake Change Data Feed (CDF)?',
+    options: [
+      'To change data formats',
+      'To track row-level changes (inserts, updates, deletes) for incremental processing and CDC pipelines',
+      'To modify table schemas',
+      'To update data quality rules'
+    ],
+    correctAnswer: 1,
+    category: 'Databricks',
+    difficulty: 'Hard',
+    explanation: 'Change Data Feed tracks all row-level changes in Delta tables, enabling incremental ETL, audit trails, replication to downstream systems, and ML feature store updates without reprocessing entire tables.'
+  },
+  {
+    id: 'db-h-7',
+    question: 'In model governance, what is the recommended pattern for A/B testing models in production?',
+    options: [
+      'Deploy both models and randomly delete one later',
+      'Use MLflow Model Registry with aliases, multi-armed bandit or staged rollout, logging predictions to Delta for comparison',
+      'Run both models manually each time',
+      'Always use the newest model'
+    ],
+    correctAnswer: 1,
+    category: 'Databricks',
+    difficulty: 'Hard',
+    explanation: 'Best practice: 1) Register both models in MLflow with different aliases/versions, 2) Route traffic (e.g., 90/10 split), 3) Log predictions + actuals to Delta, 4) Monitor metrics in real-time, 5) Gradually shift traffic based on performance, 6) Automated rollback on degradation.'
+  },
+  {
+    id: 'db-h-8',
+    question: 'What are best practices for PySpark code optimization in production pipelines?',
+    options: [
+      'Use .collect() frequently to check data',
+      'Minimize shuffles, use narrow transformations, leverage predicate pushdown, broadcast small tables, partition appropriately, cache strategically',
+      'Convert everything to pandas DataFrames',
+      'Avoid using built-in functions'
+    ],
+    correctAnswer: 1,
+    category: 'Databricks',
+    difficulty: 'Hard',
+    explanation: 'Optimization best practices: 1) Minimize shuffles (use narrow transformations), 2) Push filters early (predicate pushdown), 3) Broadcast joins for small tables (<100MB), 4) Appropriate partitioning, 5) Strategic caching, 6) Use built-in functions over UDFs, 7) Avoid collect() on large data.'
+  },
+  {
+    id: 'db-h-9',
+    question: 'SCENARIO: You need to process 1000 ML models in parallel (one per store). What is the recommended Databricks approach?',
+    options: [
+      'Run a for loop in a single notebook',
+      'Use pandas UDFs with groupBy().applyInPandas() or Spark forEach pattern for distributed model training',
+      'Create 1000 separate jobs',
+      'Use pandas and hope for the best'
+    ],
+    correctAnswer: 1,
+    category: 'Databricks',
+    difficulty: 'Hard',
+    explanation: 'For parallel model training at scale: 1) Use groupBy(\'store_id\').applyInPandas() with pandas UDF containing model training logic, or 2) Use mapInPandas() or foreach pattern. This distributes models across executors, with MLflow tracking for each model.'
+  },
+  {
+    id: 'db-h-10',
+    question: 'What is the recommended pattern for monitoring ML models in production on Databricks?',
+    options: [
+      'Check manually once a month',
+      'Scheduled jobs logging predictions + actuals to Delta, monitoring dashboards for drift/performance, alerts on degradation',
+      'Trust the model indefinitely',
+      'Retrain randomly'
+    ],
+    correctAnswer: 1,
+    category: 'Databricks',
+    difficulty: 'Hard',
+    explanation: 'Production monitoring pattern: 1) Log predictions + actuals + features to Delta, 2) Scheduled jobs compute metrics (accuracy, bias, drift), 3) Dashboards showing performance trends, 4) Alerts on metric degradation or data drift, 5) Automated retraining triggers, 6) Integration with MLflow for model lineage.'
+  },
+
+  // Forecasting Enhancement - Easy Questions
+  {
+    id: 'fce-e-1',
+    question: 'What is the first step when trying to improve a forecasting model?',
+    options: [
+      'Switch to a more complex algorithm immediately',
+      'Analyze current model performance to identify specific weaknesses',
+      'Add more features randomly',
+      'Increase the forecast horizon'
+    ],
+    correctAnswer: 1,
+    category: 'Forecasting Enhancement',
+    difficulty: 'Easy',
+    explanation: 'Before improving, understand what\'s wrong: analyze error patterns, check for bias, examine performance across segments, and identify where/when the model fails. This guides targeted improvements.'
+  },
+  {
+    id: 'fce-e-2',
+    question: 'What is feature engineering in forecasting?',
+    options: [
+      'Building physical features',
+      'Creating new input variables from existing data to improve model performance',
+      'Removing features from the model',
+      'Engineering better computers'
+    ],
+    correctAnswer: 1,
+    category: 'Forecasting Enhancement',
+    difficulty: 'Easy',
+    explanation: 'Feature engineering creates meaningful variables from raw data: lag features (previous values), rolling statistics (7-day average), date features (day-of-week), holiday indicators, etc., to help models capture patterns.'
+  },
+  {
+    id: 'fce-e-3',
+    question: 'What is ensemble forecasting?',
+    options: [
+      'Using music to predict the future',
+      'Combining predictions from multiple models to improve accuracy',
+      'Training models in groups',
+      'Running the same model multiple times'
+    ],
+    correctAnswer: 1,
+    category: 'Forecasting Enhancement',
+    difficulty: 'Easy',
+    explanation: 'Ensemble methods combine multiple models (e.g., average of ARIMA, Prophet, and XGBoost) to leverage their different strengths and reduce individual model weaknesses, often improving accuracy and robustness.'
+  },
+  {
+    id: 'fce-e-4',
+    question: 'Why is it important to test forecast improvements on holdout data?',
+    options: [
+      'To make the process longer',
+      'To ensure improvements generalize to unseen future data, not just fit training data better',
+      'To use all available data',
+      'To reduce computational cost'
+    ],
+    correctAnswer: 1,
+    category: 'Forecasting Enhancement',
+    difficulty: 'Easy',
+    explanation: 'Testing on holdout (out-of-sample) data validates that improvements genuinely enhance forecasting ability rather than just overfitting to historical data. Always validate on data not used in training.'
+  },
+  {
+    id: 'fce-e-5',
+    question: 'What is hyperparameter tuning?',
+    options: [
+      'Adjusting physical parameters of computers',
+      'Optimizing model configuration settings to improve performance',
+      'Changing the forecast horizon',
+      'Updating the data source'
+    ],
+    correctAnswer: 1,
+    category: 'Forecasting Enhancement',
+    difficulty: 'Easy',
+    explanation: 'Hyperparameter tuning systematically searches for optimal model settings (e.g., ARIMA p,d,q values, Prophet seasonality modes, XGBoost learning rate) that minimize forecast error on validation data.'
+  },
+
+  // Forecasting Enhancement - Medium Questions
+  {
+    id: 'fce-m-1',
+    question: 'SCENARIO: Your model performs well overall but poorly during promotional periods. What enhancement should you prioritize?',
+    options: [
+      'Ignore promotions and accept poor performance',
+      'Add promotional indicators as features or create separate models for promotional periods',
+      'Reduce the training data',
+      'Switch to a simpler model'
+    ],
+    correctAnswer: 1,
+    category: 'Forecasting Enhancement',
+    difficulty: 'Medium',
+    explanation: 'For segment-specific weaknesses, add relevant features (promotion type, discount percentage, timing) or use separate models/regime-switching for promotional vs. regular periods. This targeted approach improves where needed.'
+  },
+  {
+    id: 'fce-m-2',
+    question: 'What is the purpose of cross-validation in improving forecasting models?',
+    options: [
+      'To validate data quality',
+      'To robustly estimate model performance and prevent overfitting to a single test set',
+      'To cross-check with other teams',
+      'To validate business rules'
+    ],
+    correctAnswer: 1,
+    category: 'Forecasting Enhancement',
+    difficulty: 'Medium',
+    explanation: 'Time series cross-validation (rolling/expanding windows) tests the model on multiple holdout periods, providing more robust performance estimates and revealing if improvements are consistent across different time periods.'
+  },
+  {
+    id: 'fce-m-3',
+    question: 'When implementing forecast improvements, what is A/B testing in production?',
+    options: [
+      'Testing two data sources',
+      'Running new and old models in parallel on live data to compare real-world performance',
+      'Alphabetically sorting models',
+      'Testing on two different computers'
+    ],
+    correctAnswer: 1,
+    category: 'Forecasting Enhancement',
+    difficulty: 'Medium',
+    explanation: 'A/B testing deploys both old (baseline) and new (improved) models, routing different requests to each, collecting predictions and actuals, then comparing performance on real-world data before full rollout.'
+  },
+  {
+    id: 'fce-m-4',
+    question: 'What does "forecast adoption" mean in a business context?',
+    options: [
+      'Legal adoption of forecasting methods',
+      'The extent to which stakeholders trust and use forecasts for decision-making',
+      'Adding new products to forecast',
+      'Automating forecast generation'
+    ],
+    correctAnswer: 1,
+    category: 'Forecasting Enhancement',
+    difficulty: 'Medium',
+    explanation: 'Forecast adoption measures how much stakeholders trust and act on forecasts. Low adoption despite good accuracy often indicates poor explainability, lack of actionability, or misalignment with business needs.'
+  },
+  {
+    id: 'fce-m-5',
+    question: 'SCENARIO: Stakeholders want more accurate forecasts but also faster model updates. How should you approach this?',
+    options: [
+      'Choose either accuracy or speed, not both',
+      'Profile the pipeline to identify bottlenecks, optimize data processing, consider simpler models for less critical SKUs, or use cached features',
+      'Tell stakeholders it\'s impossible',
+      'Remove all data validation'
+    ],
+    correctAnswer: 1,
+    category: 'Forecasting Enhancement',
+    difficulty: 'Medium',
+    explanation: 'Balance accuracy and speed through: 1) Pipeline optimization (parallelize data processing), 2) Tiered approach (complex models for high-value items, simple for others), 3) Cached feature engineering, 4) Incremental retraining, 5) Efficient model selection.'
+  },
+  {
+    id: 'fce-m-6',
+    question: 'What is the purpose of explainability in increasing forecast adoption?',
+    options: [
+      'Making models more complex',
+      'Helping stakeholders understand why forecasts changed, building trust and facilitating better decisions',
+      'Reducing model accuracy',
+      'Slowing down predictions'
+    ],
+    correctAnswer: 1,
+    category: 'Forecasting Enhancement',
+    difficulty: 'Medium',
+    explanation: 'Explainability shows why forecasts changed (e.g., seasonality, trend, external factors like weather), builds stakeholder trust, enables informed overrides, and helps identify data issues or model problems early.'
+  },
+  {
+    id: 'fce-m-7',
+    question: 'When adding external variables (weather, economics) to improve forecasts, what should you consider?',
+    options: [
+      'Add all available data without consideration',
+      'Validate causal relationship, ensure availability at forecast time, check for multicollinearity, and test incremental value',
+      'Only use variables that are free',
+      'Avoid external variables entirely'
+    ],
+    correctAnswer: 1,
+    category: 'Forecasting Enhancement',
+    difficulty: 'Medium',
+    explanation: 'External variables must: 1) Have logical causal relationship, 2) Be available at forecast time (or have reliable forecasts), 3) Not be highly correlated with existing features, 4) Demonstrably improve out-of-sample performance to justify complexity.'
+  },
+
+  // Forecasting Enhancement - Hard Questions
+  {
+    id: 'fce-h-1',
+    question: 'SCENARIO: You improved model RMSE by 15% but adoption decreased. What likely happened?',
+    options: [
+      'Users don\'t understand math',
+      'Improvements may have reduced explainability, changed forecast behavior unexpectedly, or optimized wrong metric for business needs',
+      'The old model was perfect',
+      'Users are always resistant to change'
+    ],
+    correctAnswer: 1,
+    category: 'Forecasting Enhancement',
+    difficulty: 'Hard',
+    explanation: 'Lower error doesn\'t guarantee adoption. Possible issues: 1) Less interpretable model, 2) Optimized average error but increased errors on critical items/periods, 3) Changed forecast behavior making planning harder, 4) Didn\'t communicate changes. Balance accuracy with usability.'
+  },
+  {
+    id: 'fce-h-2',
+    question: 'What is the recommended approach for implementing a forecasting improvement pipeline?',
+    options: [
+      'Make all changes at once',
+      'Iterative: baseline → hypothesis → implement → A/B test → measure → learn → iterate, with version control and MLflow tracking',
+      'Random trial and error',
+      'Copy competitors\' approaches'
+    ],
+    correctAnswer: 1,
+    category: 'Forecasting Enhancement',
+    difficulty: 'Hard',
+    explanation: 'Scientific approach: 1) Establish baseline metrics, 2) Form hypothesis for improvement, 3) Implement change, 4) A/B test in production, 5) Measure impact on multiple metrics, 6) Learn from results, 7) Iterate. Track everything in MLflow/version control.'
+  },
+  {
+    id: 'fce-h-3',
+    question: 'How should you balance model complexity vs. interpretability when improving forecasts?',
+    options: [
+      'Always choose the most complex model',
+      'Assess business context: critical decisions need interpretability, routine decisions can use black boxes if monitored',
+      'Always use simple models only',
+      'Interpretability never matters'
+    ],
+    correctAnswer: 1,
+    category: 'Forecasting Enhancement',
+    difficulty: 'Hard',
+    explanation: 'Context-dependent trade-off: High-stakes decisions (financial forecasts, safety-critical) need interpretable models. Routine operational forecasts can use complex models with proper monitoring. Consider hybrid approaches: complex model + post-hoc explanations (SHAP).'
+  },
+  {
+    id: 'fce-h-4',
+    question: 'SCENARIO: After implementing improvements, how should you monitor for model degradation?',
+    options: [
+      'Check once a year',
+      'Automated dashboards tracking accuracy metrics, bias, prediction distribution, data drift, with alerts on anomalies',
+      'Trust the model indefinitely',
+      'Wait for user complaints'
+    ],
+    correctAnswer: 1,
+    category: 'Forecasting Enhancement',
+    difficulty: 'Hard',
+    explanation: 'Continuous monitoring: 1) Track accuracy metrics (MAPE, bias) over time, 2) Monitor data drift (feature distributions), 3) Concept drift (relationship changes), 4) Prediction distribution shifts, 5) Automated alerts, 6) Regular review cadence, 7) Automated retraining triggers.'
+  },
+  {
+    id: 'fce-h-5',
+    question: 'What is the "cold start" problem in forecasting and how can improvements address it?',
+    options: [
+      'Models that don\'t work in winter',
+      'Forecasting new products with no historical data; solutions include hierarchical models, feature-based models, or transfer learning',
+      'Slow model startup time',
+      'Computer temperature issues'
+    ],
+    correctAnswer: 1,
+    category: 'Forecasting Enhancement',
+    difficulty: 'Hard',
+    explanation: 'Cold start (new products/stores with no history) solutions: 1) Hierarchical forecasting (use category-level patterns), 2) Feature-based models (predict based on product attributes), 3) Transfer learning from similar items, 4) Incorporate launch plan/market research.'
+  },
+  {
+    id: 'fce-h-6',
+    question: 'When testing forecast improvements, what is the "peek-ahead" bias and how do you avoid it?',
+    options: [
+      'Looking at test data before training',
+      'Using information from the future (e.g., using values known only after forecast time) in features; prevent by strict temporal splits',
+      'Testing with biased data',
+      'Peeking at competitor forecasts'
+    ],
+    correctAnswer: 1,
+    category: 'Forecasting Enhancement',
+    difficulty: 'Hard',
+    explanation: 'Peek-ahead bias: using future information in features (e.g., using t+1 data to predict t). Prevention: 1) Strict temporal train/test splits, 2) Feature lag validation, 3) Ensure all features available at forecast time, 4) Simulate production environment in testing.'
+  },
+  {
+    id: 'fce-h-7',
+    question: 'What metrics beyond accuracy should you track to measure forecast improvement success?',
+    options: [
+      'Only accuracy matters',
+      'Business impact (inventory costs, service levels), user adoption, forecast stability, computational cost, explainability scores',
+      'Number of models deployed',
+      'Lines of code written'
+    ],
+    correctAnswer: 1,
+    category: 'Forecasting Enhancement',
+    difficulty: 'Hard',
+    explanation: 'Holistic success metrics: 1) Business KPIs (reduced stockouts, lower inventory costs), 2) User adoption rates, 3) Forecast stability/revision frequency, 4) Computational efficiency, 5) Explainability/trust scores, 6) Multiple accuracy metrics across segments, 7) Time-to-value.'
+  },
+  {
+    id: 'fce-h-8',
+    question: 'SCENARIO: Your improved model has better average accuracy but stakeholders complain about increased forecast volatility. What should you do?',
+    options: [
+      'Ignore stakeholder feedback',
+      'Add smoothing, tune model parameters for stability, or create separate models for planning (stable) vs. execution (responsive) horizons',
+      'Revert to old model completely',
+      'Remove all recent data'
+    ],
+    correctAnswer: 1,
+    category: 'Forecasting Enhancement',
+    difficulty: 'Hard',
+    explanation: 'Forecast volatility impacts planning. Solutions: 1) Add dampening/smoothing, 2) Tune parameters for stability-accuracy trade-off, 3) Use different models for different horizons (stable for long-term planning, responsive for short-term), 4) Implement forecast reconciliation, 5) Communicate expected volatility.'
   }
 ];
 
@@ -1624,9 +2352,11 @@ export function getQuestionsByFilter({ category, difficulty, limit }) {
 }
 
 // Get random questions with balanced distribution
-export function getRandomQuestions(count = 30, selectedCategories = ['LLM', 'LLMOps', 'GenAI', 'Forecasting'], difficultyDistribution = null) {
-  // Filter questions by selected categories
-  const filteredQuestions = questions.filter(q => selectedCategories.includes(q.category));
+export function getRandomQuestions(count = 30, selectedCategories = ['LLM', 'LLMOps', 'GenAI', 'Forecasting', 'Databricks', 'Forecasting Enhancement'], difficultyDistribution = null, excludeQuestionIds = []) {
+  // Filter questions by selected categories and exclude used questions
+  const filteredQuestions = questions.filter(q =>
+    selectedCategories.includes(q.category) && !excludeQuestionIds.includes(q.id)
+  );
 
   // Shuffle function
   const shuffle = (array) => {

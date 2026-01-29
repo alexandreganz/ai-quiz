@@ -5,6 +5,7 @@ import Results from './components/Results';
 import Sessions from './components/Sessions';
 import SessionDetail from './components/SessionDetail';
 import { getRandomQuestions } from './data/questions';
+import { getUsedQuestionIds } from './services/storage';
 
 function App() {
   const [currentView, setCurrentView] = useState('home');
@@ -14,7 +15,8 @@ function App() {
 
   const handleStartQuiz = (selectedCategories, difficultyDistribution) => {
     const totalCount = difficultyDistribution.easy + difficultyDistribution.medium + difficultyDistribution.hard;
-    const questions = getRandomQuestions(totalCount, selectedCategories, difficultyDistribution);
+    const usedQuestionIds = getUsedQuestionIds();
+    const questions = getRandomQuestions(totalCount, selectedCategories, difficultyDistribution, usedQuestionIds);
     setQuizQuestions(questions);
     setCurrentView('quiz');
   };

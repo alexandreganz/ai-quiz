@@ -1,6 +1,7 @@
 // localStorage service for managing quiz sessions
 
 const SESSIONS_KEY = 'ai_quiz_sessions';
+const USED_QUESTIONS_KEY = 'ai_quiz_used_questions';
 
 // Generate unique ID for sessions
 export function generateId() {
@@ -82,4 +83,39 @@ export function getStatistics() {
     bestScore: Math.max(...scores),
     totalQuestions: totalQuestions
   };
+}
+
+// Get used question IDs
+export function getUsedQuestionIds() {
+  try {
+    const usedQuestions = localStorage.getItem(USED_QUESTIONS_KEY);
+    return usedQuestions ? JSON.parse(usedQuestions) : [];
+  } catch (error) {
+    console.error('Error reading used questions:', error);
+    return [];
+  }
+}
+
+// Add question IDs to used list
+export function addUsedQuestions(questionIds) {
+  try {
+    const usedQuestions = getUsedQuestionIds();
+    const newUsedQuestions = [...new Set([...usedQuestions, ...questionIds])]; // Remove duplicates
+    localStorage.setItem(USED_QUESTIONS_KEY, JSON.stringify(newUsedQuestions));
+    return newUsedQuestions;
+  } catch (error) {
+    console.error('Error adding used questions:', error);
+    throw error;
+  }
+}
+
+// Reset used questions (make all questions available again)
+export function resetUsedQuestions() {
+  try {
+    localStorage.setItem(USED_QUESTIONS_KEY, JSON.stringify([]));
+    return true;
+  } catch (error) {
+    console.error('Error resetting used questions:', error);
+    return false;
+  }
 }

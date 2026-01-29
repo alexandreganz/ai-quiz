@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { getStatistics } from '../services/storage';
+import { getStatistics, getUsedQuestionIds, resetUsedQuestions } from '../services/storage';
+import { questions } from '../data/questions';
 
 function Home({ onStartQuiz, onViewSessions }) {
   const stats = getStatistics();
-  const [selectedCategories, setSelectedCategories] = useState(['LLM', 'LLMOps', 'GenAI', 'Forecasting']);
+  const usedQuestionIds = getUsedQuestionIds();
+  const [selectedCategories, setSelectedCategories] = useState(['LLM', 'LLMOps', 'GenAI', 'Forecasting', 'Databricks', 'Forecasting Enhancement']);
   const [easyCount, setEasyCount] = useState(10);
   const [mediumCount, setMediumCount] = useState(10);
   const [hardCount, setHardCount] = useState(10);
@@ -12,7 +14,9 @@ function Home({ onStartQuiz, onViewSessions }) {
     { id: 'LLM', name: 'LLM', description: 'Large Language Models' },
     { id: 'LLMOps', name: 'LLMOps', description: 'LLM Operations' },
     { id: 'GenAI', name: 'GenAI', description: 'Generative AI' },
-    { id: 'Forecasting', name: 'Forecasting', description: 'Time Series & Demand Planning' }
+    { id: 'Forecasting', name: 'Forecasting', description: 'Time Series & Demand Planning' },
+    { id: 'Databricks', name: 'Databricks', description: 'Orchestration & PySpark Best Practices' },
+    { id: 'Forecasting Enhancement', name: 'Forecasting Enhancement', description: 'Model Improvements & Adoption' }
   ];
 
   const toggleCategory = (categoryId) => {
@@ -28,10 +32,28 @@ function Home({ onStartQuiz, onViewSessions }) {
   };
 
   const handleStartQuiz = () => {
+    if (totalAvailableCount < totalQuestions) {
+      alert(`Not enough available questions! You need ${totalQuestions} questions but only ${totalAvailableCount} are available. Please reduce the number of questions or reset the question pool.`);
+      return;
+    }
     onStartQuiz(selectedCategories, { easy: easyCount, medium: mediumCount, hard: hardCount });
   };
 
+  const handleResetQuestions = () => {
+    if (window.confirm('Are you sure you want to reset? This will make all questions available again for future quizzes.')) {
+      resetUsedQuestions();
+      window.location.reload();
+    }
+  };
+
   const totalQuestions = easyCount + mediumCount + hardCount;
+
+  // Calculate available questions
+  const availableQuestions = questions.filter(q =>
+    selectedCategories.includes(q.category) && !usedQuestionIds.includes(q.id)
+  );
+  const totalAvailableCount = availableQuestions.length;
+  const usedCount = usedQuestionIds.length;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
@@ -42,7 +64,7 @@ function Home({ onStartQuiz, onViewSessions }) {
               AI Expert Quiz
             </h1>
             <p className="text-lg text-gray-600">
-              Test your knowledge on LLM, LLMOps, GenAI, and Forecasting
+              Test your knowledge on LLM, LLMOps, GenAI, Forecasting, Databricks, and more
             </p>
           </div>
 
@@ -69,6 +91,52 @@ function Home({ onStartQuiz, onViewSessions }) {
               </div>
             </div>
           )}
+
+          {/* Question Pool Status */}
+          <div className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl p-6 mb-8">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-xl font-semibold text-gray-900">
+                Question Pool Status
+              </h2>
+              {usedCount > 0 && (
+                <button
+                  onClick={handleResetQuestions}
+                  className="bg-purple-600 hover:bg-purple-700 text-white text-sm font-semibold py-2 px-4 rounded-lg transition duration-200 shadow-md hover:shadow-lg"
+                >
+                  Reset All Questions
+                </button>
+              )}
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="text-center p-4 bg-white rounded-lg shadow-sm">
+                <div className="text-3xl font-bold text-green-600">
+                  {totalAvailableCount}
+                </div>
+                <div className="text-sm text-gray-600 mt-1">Available</div>
+              </div>
+              <div className="text-center p-4 bg-white rounded-lg shadow-sm">
+                <div className="text-3xl font-bold text-orange-600">
+                  {usedCount}
+                </div>
+                <div className="text-sm text-gray-600 mt-1">Used</div>
+              </div>
+            </div>
+            {totalAvailableCount < totalQuestions && (
+              <div className="mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
+                <p className="text-sm text-yellow-800">
+                  ⚠️ Warning: Only {totalAvailableCount} questions available for selected categories. You requested {totalQuestions} questions.
+                </p>
+              </div>
+            )}
+            {usedCount > 0 && (
+              <div className="mt-4 text-sm text-gray-600">
+                <p>
+                  You've used {usedCount} question{usedCount !== 1 ? 's' : ''} in previous sessions.
+                  These won't appear in new quizzes unless you reset.
+                </p>
+              </div>
+            )}
+          </div>
 
           {/* Category Selection */}
           <div className="bg-gray-50 rounded-xl p-6 mb-8">
@@ -176,7 +244,7 @@ function Home({ onStartQuiz, onViewSessions }) {
               </li>
               <li className="flex items-start">
                 <span className="text-indigo-600 mr-2">•</span>
-                <span>Topics: Choose from LLM, LLMOps, GenAI, and Forecasting</span>
+                <span>Topics: Choose from LLM, LLMOps, GenAI, Forecasting, Databricks, and Forecasting Enhancement</span>
               </li>
               <li className="flex items-start">
                 <span className="text-indigo-600 mr-2">•</span>
@@ -193,9 +261,14 @@ function Home({ onStartQuiz, onViewSessions }) {
           <div className="space-y-4">
             <button
               onClick={handleStartQuiz}
-              className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-4 px-6 rounded-xl transition duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+              disabled={totalAvailableCount < totalQuestions}
+              className={`w-full text-white font-semibold py-4 px-6 rounded-xl transition duration-200 shadow-lg transform ${
+                totalAvailableCount < totalQuestions
+                  ? 'bg-gray-400 cursor-not-allowed'
+                  : 'bg-indigo-600 hover:bg-indigo-700 hover:shadow-xl hover:-translate-y-0.5'
+              }`}
             >
-              Start New Quiz
+              Start New Quiz {totalAvailableCount < totalQuestions && '(Not Enough Questions)'}
             </button>
 
             {stats.totalAttempts > 0 && (

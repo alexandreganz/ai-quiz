@@ -1,5 +1,5 @@
 import React from 'react';
-import { saveSession } from '../services/storage';
+import { saveSession, addUsedQuestions } from '../services/storage';
 
 function Results({ questions, answers, onBackToHome, onViewSessions, sessionSaved = false }) {
   const score = answers.reduce((total, answer, index) => {
@@ -9,11 +9,16 @@ function Results({ questions, answers, onBackToHome, onViewSessions, sessionSave
   const percentage = Math.round((score / questions.length) * 100);
 
   const handleSaveSession = () => {
+    // Extract question IDs and mark them as used
+    const questionIds = questions.map(q => q.id);
+    addUsedQuestions(questionIds);
+
     saveSession({
       questions,
       answers,
       score,
-      totalQuestions: questions.length
+      totalQuestions: questions.length,
+      questionIds // Store question IDs in the session for reference
     });
     // Reload to show updated state with save button removed
     window.location.reload();
